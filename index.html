@@ -1,0 +1,1749 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#092a55">
+  <meta name="description" content="Admissions portfolio for El Ghali Sany's Najran University MBA application, focused on business administration, AI-enabled digital transformation, smart-city readiness, financial performance, and Vision 2030.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="El Ghali Sany | Najran University MBA Portfolio">
+  <meta property="og:description" content="Evidence-first Najran University MBA admissions portfolio: managerial readiness, ROI discipline, operations, data governance, stakeholder trust, and ethical business reasoning.">
+  <title>El Ghali Sany | Najran University MBA Portfolio</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect rx='18' width='64' height='64' fill='%23061c38'/%3E%3Crect x='8' y='8' width='48' height='48' rx='13' fill='none' stroke='%23c7a252' stroke-width='2'/%3E%3Ctext x='32' y='39' text-anchor='middle' font-family='Georgia,serif' font-size='20' font-weight='700' letter-spacing='1' fill='%23ead9ae'%3EES%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="vendor/leaflet.min.css">
+  <style>
+    :root {
+      --navy-950: #061c38;
+      --navy-900: #092a55;
+      --navy-800: #123f78;
+      --navy-700: #1d5798;
+      --blue-100: #e7f0fb;
+      --gold-600: #ae8737;
+      --gold-500: #c7a252;
+      --gold-200: #ead9ae;
+      --sand-100: #f7f2e8;
+      --sand-50: #fcfaf5;
+      --pearl: #f8fafc;
+      --white: #ffffff;
+      --charcoal: #172033;
+      --muted: #5a6677;
+      --line: rgba(9, 42, 85, 0.14);
+      --line-strong: rgba(9, 42, 85, 0.23);
+      --success: #176444;
+      --shadow: 0 18px 42px rgba(6, 28, 56, 0.1);
+      --shadow-soft: 0 10px 24px rgba(6, 28, 56, 0.07);
+      --radius-lg: 26px;
+      --radius-md: 18px;
+      --radius-sm: 12px;
+      --max-width: 1240px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 92px; }
+    body {
+      margin: 0;
+      color: var(--charcoal);
+      background:
+        radial-gradient(circle at 91% 5%, rgba(199, 162, 82, 0.16), transparent 22rem),
+        radial-gradient(circle at 4% 22%, rgba(29, 87, 152, 0.1), transparent 24rem),
+        linear-gradient(180deg, var(--pearl), var(--sand-50));
+      font-family: Inter, Arial, Helvetica, sans-serif;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; }
+    img { display: block; max-width: 100%; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    :focus-visible { outline: 3px solid var(--gold-500); outline-offset: 4px; }
+
+    .skip-link {
+      position: fixed;
+      left: 18px;
+      top: -90px;
+      z-index: 100;
+      border-radius: 999px;
+      padding: 12px 18px;
+      background: var(--navy-950);
+      color: var(--white);
+      font-weight: 800;
+      transition: top 0.2s ease;
+    }
+    .skip-link:focus { top: 18px; }
+
+    .container { width: min(calc(100% - 36px), var(--max-width)); margin: 0 auto; }
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      border-bottom: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(18px);
+    }
+    .nav-wrap {
+      min-height: 74px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+    .brand-mark {
+      width: 46px;
+      height: 46px;
+      position: relative;
+      display: grid;
+      place-items: center;
+      flex: 0 0 auto;
+      border-radius: 15px;
+      border: 1px solid rgba(199,162,82,.62);
+      background: linear-gradient(145deg, #0b315f, #061c38);
+      box-shadow: 0 8px 18px rgba(6,28,56,.16), inset 0 1px 0 rgba(255,255,255,.14);
+    }
+    .brand-mark::after {
+      content: "";
+      position: absolute;
+      inset: 6px;
+      border: 1px solid rgba(234,217,174,.38);
+      border-radius: 10px;
+      pointer-events: none;
+    }
+    .brand-monogram {
+      position: relative;
+      z-index: 1;
+      color: #f2deaa;
+      font-family: Georgia, serif;
+      font-size: .84rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+      transform: translateX(.04em);
+    }
+    .brand-copy { display: grid; line-height: 1.18; }
+    .brand-copy strong { color: var(--navy-950); letter-spacing: -0.03em; }
+    .brand-copy span { color: var(--muted); font-size: 0.75rem; font-weight: 700; }
+    .nav-links { display: flex; align-items: center; gap: 6px; }
+    .nav-links a {
+      border-radius: 999px;
+      padding: 8px 10px;
+      color: var(--navy-900);
+      font-size: 0.76rem;
+      font-weight: 800;
+      text-decoration: none;
+    }
+    .nav-links a:hover, .nav-links a.active { background: var(--blue-100); }
+    .nav-contact {
+      margin-left: 4px;
+      background: var(--navy-900);
+      color: var(--white) !important;
+    }
+    .lang-toggle {
+      border: 1px solid var(--gold-500);
+      border-radius: 999px;
+      padding: 8px 11px;
+      background: var(--sand-100);
+      color: var(--navy-900);
+      font-size: 0.76rem;
+      font-weight: 900;
+      cursor: pointer;
+    }
+    body.rtl { direction: rtl; font-family: Tahoma, Arial, sans-serif; }
+    body.rtl .brand-copy, body.rtl h1, body.rtl h2, body.rtl h3, body.rtl p, body.rtl address { letter-spacing: 0; }
+    body.rtl .fact strong { text-align: left; }
+    body.rtl .contribution { border-right: 5px solid var(--gold-500); border-left: 1px solid var(--line); }
+    body.rtl .experience-card ul { padding-right: 18px; padding-left: 0; }
+    body.rtl .sumo-shell { direction: ltr; }
+    body.rtl .sumo-heading strong, body.rtl .sumo-heading span, body.rtl .sumo-note { font-family: Tahoma, Arial, sans-serif; }
+    .menu-toggle {
+      display: none;
+      width: 44px;
+      height: 44px;
+      border: 1px solid var(--line);
+      border-radius: 13px;
+      background: var(--white);
+      color: var(--navy-900);
+      cursor: pointer;
+    }
+    .menu-toggle svg { width: 22px; height: 22px; }
+
+    main { overflow: hidden; }
+    .hero { padding: 56px 0 42px; }
+    .hero-grid { display: grid; grid-template-columns: 1.24fr 0.76fr; gap: 20px; align-items: stretch; }
+    .hero-main, .hero-side, .panel, .fit-card, .profile-card, .pillar, .method-card, .project-card, .doc-card, .language-card, .experience-card, .timeline-card, .contact-card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      background: rgba(255, 255, 255, 0.88);
+      box-shadow: var(--shadow);
+    }
+    .hero-main {
+      position: relative;
+      overflow: hidden;
+      padding: clamp(28px, 4.4vw, 54px);
+      background:
+        linear-gradient(135deg, rgba(255,255,255,0.97), rgba(248,250,252,0.94)),
+        var(--white);
+    }
+    .hero-main::after {
+      position: absolute;
+      right: -58px;
+      bottom: -86px;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      border: 38px solid rgba(199, 162, 82, 0.11);
+      content: "";
+    }
+    .micro-title, .kicker, .arabic {
+      color: var(--gold-600);
+      font-weight: 800;
+    }
+    .micro-title { margin: 0 0 16px; font-size: 0.92rem; letter-spacing: 0.02em; }
+    h1, h2, h3, p { margin-top: 0; }
+    h1 {
+      max-width: 900px;
+      margin-bottom: 16px;
+      color: var(--navy-950);
+      font-size: clamp(2.35rem, 5vw, 4.85rem);
+      line-height: 1.01;
+      letter-spacing: -0.07em;
+    }
+    .hero-subtitle {
+      max-width: 920px;
+      margin-bottom: 18px;
+      color: var(--navy-700);
+      font-size: clamp(1rem, 1.8vw, 1.24rem);
+      font-weight: 800;
+    }
+    .hero-statement { max-width: 820px; margin-bottom: 0; color: var(--muted); font-size: 1.04rem; font-weight: 600; }
+    .cta-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 44px;
+      border: 1px solid var(--line-strong);
+      border-radius: 999px;
+      padding: 10px 15px;
+      background: var(--white);
+      color: var(--navy-900);
+      font-size: 0.86rem;
+      font-weight: 850;
+      text-decoration: none;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    }
+    .btn:hover { transform: translateY(-2px); box-shadow: var(--shadow-soft); }
+    .btn-primary { border-color: var(--navy-900); background: var(--navy-900); color: var(--white); }
+    .btn-gold { border-color: var(--gold-500); background: var(--sand-100); color: var(--navy-950); }
+    .badge-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 26px; }
+    .badge, .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 6px 9px;
+      color: var(--navy-800);
+      background: var(--blue-100);
+      font-size: 0.72rem;
+      font-weight: 850;
+    }
+    .badge::before { width: 6px; height: 6px; border-radius: 50%; background: var(--gold-500); content: ""; }
+    .hero-side { display: grid; grid-template-rows: auto 1fr; overflow: hidden; background: var(--navy-950); color: var(--white); }
+    .portrait-wrap { position: relative; min-height: 270px; overflow: hidden; }
+    .portrait {
+      width: 100%;
+      height: 100%;
+      min-height: 270px;
+      object-fit: cover;
+      object-position: center top;
+      opacity: 0.96;
+    }
+    .portrait-wrap::after { position: absolute; inset: auto 0 0; height: 46%; background: linear-gradient(transparent, rgba(6,28,56,0.76)); content: ""; }
+    .hero-facts { display: grid; gap: 13px; padding: 22px; }
+    .fact { display: flex; justify-content: space-between; gap: 12px; border-bottom: 1px solid rgba(255,255,255,0.16); padding-bottom: 11px; }
+    .fact:last-child { border-bottom: 0; padding-bottom: 0; }
+    .fact span { color: rgba(255,255,255,0.7); font-size: 0.78rem; font-weight: 800; }
+    .fact strong { max-width: 62%; color: var(--white); font-size: 0.84rem; text-align: right; }
+
+    .section { padding: 52px 0; }
+    .section-sand { background: rgba(247, 242, 232, 0.62); }
+    .section-navy { background: var(--navy-950); color: var(--white); }
+    .section-head { display: grid; gap: 8px; max-width: 840px; margin-bottom: 22px; }
+    .kicker { margin-bottom: 0; font-size: 0.73rem; letter-spacing: 0.15em; text-transform: uppercase; }
+    h2 { margin-bottom: 0; color: var(--navy-950); font-size: clamp(1.85rem, 3.3vw, 3rem); line-height: 1.08; letter-spacing: -0.05em; }
+    h3 { color: var(--navy-900); font-size: 1.02rem; line-height: 1.28; }
+    .section-head p, .panel p, .fit-card p, .profile-card p, .pillar p, .method-card p, .project-card p, .language-card p, .experience-card p, .timeline-card p, .contact-card p {
+      margin-bottom: 0;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+    .section-navy h2, .section-navy h3 { color: var(--white); }
+    .section-navy .section-head p { color: rgba(255,255,255,0.72); }
+    .arabic { font-family: Tahoma, Arial, sans-serif; font-size: 0.92rem; line-height: 1.8; }
+    .grid-2, .grid-3, .grid-4 { display: grid; gap: 14px; }
+    .grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .grid-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .panel, .fit-card, .profile-card, .pillar, .method-card, .project-card, .language-card, .experience-card, .timeline-card, .contact-card { padding: 20px; box-shadow: var(--shadow-soft); }
+    .panel h3, .fit-card h3, .profile-card h3, .pillar h3, .method-card h3, .project-card h3, .language-card h3, .experience-card h3, .timeline-card h3, .contact-card h3 { margin-bottom: 8px; }
+    .card-number { display: inline-grid; width: 34px; height: 34px; margin-bottom: 13px; place-items: center; border-radius: 50%; background: var(--blue-100); color: var(--navy-900); font-size: 0.8rem; font-weight: 900; }
+    .quote-panel {
+      display: grid;
+      grid-template-columns: 0.76fr 1.24fr;
+      gap: 16px;
+      align-items: center;
+      border-radius: var(--radius-lg);
+      padding: clamp(24px, 4vw, 42px);
+      background: linear-gradient(135deg, var(--navy-950), var(--navy-800));
+      box-shadow: var(--shadow);
+    }
+    .quote-panel blockquote { margin: 0; color: var(--white); font-size: clamp(1.8rem, 4vw, 3.2rem); font-weight: 900; letter-spacing: -0.06em; line-height: 1.02; }
+    .quote-panel p { margin-bottom: 0; color: rgba(255,255,255,0.76); }
+    .tag-row { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 14px; }
+    .tag { border: 1px solid var(--line); border-radius: 999px; padding: 5px 8px; color: var(--navy-700); background: var(--white); font-size: 0.71rem; font-weight: 850; }
+    .section-navy .tag { border-color: rgba(255,255,255,0.18); color: var(--white); background: rgba(255,255,255,0.08); }
+    .meta { margin-bottom: 7px; color: var(--gold-600); font-size: 0.73rem; font-weight: 900; letter-spacing: 0.07em; text-transform: uppercase; }
+
+    .proposal-shell { display: grid; grid-template-columns: 0.98fr 1.02fr; gap: 16px; align-items: start; }
+    .proposal-card { border: 1px solid rgba(255,255,255,0.14); border-radius: var(--radius-lg); padding: 23px; background: rgba(255,255,255,0.075); }
+    .proposal-card p { color: rgba(255,255,255,0.74); font-size: 0.92rem; }
+    .proposal-card .arabic { color: var(--gold-200); }
+    .pillar-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 10px; }
+    .pillar { border-color: rgba(255,255,255,0.13); padding: 15px; background: rgba(255,255,255,0.08); box-shadow: none; }
+    .pillar h3 { margin-bottom: 4px; font-size: 0.92rem; }
+    .pillar p { color: rgba(255,255,255,0.68); font-size: 0.82rem; }
+    .flow {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 8px;
+      margin-top: 16px;
+    }
+    .flow-step {
+      position: relative;
+      display: grid;
+      min-height: 105px;
+      align-content: center;
+      border: 1px solid rgba(255,255,255,0.16);
+      border-radius: var(--radius-sm);
+      padding: 12px;
+      background: rgba(255,255,255,0.08);
+      color: var(--white);
+      font-size: 0.76rem;
+      font-weight: 850;
+      text-align: center;
+    }
+    .flow-step:not(:last-child)::after { position: absolute; right: -11px; z-index: 2; color: var(--gold-500); content: "→"; }
+    .method-grid { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 10px; margin-top: 14px; }
+    .method-card { border-color: rgba(255,255,255,0.13); padding: 13px; background: rgba(255,255,255,0.075); box-shadow: none; }
+    .method-card p { color: rgba(255,255,255,0.7); font-size: 0.78rem; }
+
+    .contribution { border-left: 5px solid var(--gold-500); }
+    .project-card { display: flex; flex-direction: column; }
+    .project-card .tag-row { margin-top: auto; padding-top: 14px; }
+    .project-type { margin-bottom: 8px; color: var(--gold-600); font-size: 0.75rem; font-weight: 900; text-transform: uppercase; }
+    .relevance { margin-top: 12px; border-top: 1px solid var(--line); padding-top: 12px; }
+    .relevance strong { display: block; margin-bottom: 3px; color: var(--navy-900); font-size: 0.78rem; }
+
+    .docs-grid { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 12px; }
+    .doc-card {
+      display: flex;
+      min-height: 240px;
+      flex-direction: column;
+      justify-content: space-between;
+      border-radius: var(--radius-md);
+      padding: 17px;
+      box-shadow: var(--shadow-soft);
+    }
+    .doc-card h3 { margin-bottom: 6px; font-size: 0.95rem; }
+    .doc-type { color: var(--gold-600); font-size: 0.7rem; font-weight: 900; letter-spacing: 0.09em; text-transform: uppercase; }
+    .doc-role { margin: 10px 0 14px; color: var(--muted); font-size: 0.81rem; line-height: 1.55; }
+    .doc-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+    .doc-actions .btn { min-height: 38px; padding: 8px 11px; font-size: 0.76rem; }
+    .status { color: var(--success); background: #e8f5ef; }
+    .status::before { width: 7px; height: 7px; border-radius: 50%; background: var(--success); content: ""; }
+
+    .language-score { margin-bottom: 8px; color: var(--navy-900); font-size: 1.55rem; font-weight: 900; letter-spacing: -0.04em; }
+    .experience-card ul { margin: 12px 0 0; padding-left: 18px; color: var(--muted); font-size: 0.86rem; }
+    .experience-card li + li { margin-top: 5px; }
+
+    .sumo-shell {
+      overflow: hidden;
+      border: 1px solid rgba(199, 162, 82, 0.38);
+      border-radius: var(--radius-lg);
+      background: #061425;
+      box-shadow: var(--shadow);
+      color: #e6f2ff;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+    }
+    .sumo-heading {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 13px 15px;
+      border-bottom: 1px solid rgba(199, 162, 82, 0.24);
+      background: linear-gradient(90deg, rgba(18, 63, 120, 0.48), rgba(6, 28, 56, 0.72));
+    }
+    .sumo-heading strong { color: var(--white); font-family: Inter, Arial, sans-serif; font-size: 0.88rem; }
+    .sumo-heading span { color: var(--gold-200); font-size: 0.69rem; }
+    .sumo-toolbar { display: flex; flex-wrap: wrap; gap: 6px; padding: 8px; border-bottom: 1px solid rgba(199, 162, 82, 0.19); background: #081a30; }
+    .sumo-mode, .sumo-zone, .sumo-control {
+      border: 1px solid rgba(199, 162, 82, 0.28);
+      border-radius: 6px;
+      padding: 6px 9px;
+      background: #0d2340;
+      color: #afc4dc;
+      font: inherit;
+      font-size: 0.67rem;
+      cursor: pointer;
+    }
+    .sumo-mode:hover, .sumo-zone:hover, .sumo-control:hover { border-color: var(--gold-500); color: var(--white); }
+    .sumo-mode.active, .sumo-zone.active { border-color: var(--zone-color, var(--gold-500)); color: var(--zone-color, var(--gold-200)); background: rgba(199, 162, 82, 0.12); box-shadow: inset 0 -2px 0 var(--zone-color, var(--gold-500)); }
+    .sumo-grid { display: grid; grid-template-columns: minmax(0, 1fr) 230px; min-height: 460px; }
+    .sumo-map-wrap { position: relative; min-height: 460px; background: #071321; }
+    #sumoMap { position: absolute; inset: 0; z-index: 1; min-height: 460px; }
+    #sumoCanvas { position: absolute; inset: 0; z-index: 500; width: 100%; height: 100%; pointer-events: none; }
+    .sumo-map-badge, .sumo-legend {
+      position: absolute;
+      z-index: 700;
+      border: 1px solid rgba(199, 162, 82, 0.3);
+      border-radius: 7px;
+      background: rgba(6, 20, 37, 0.9);
+      pointer-events: none;
+    }
+    .sumo-map-badge { top: 10px; left: 10px; max-width: calc(100% - 20px); padding: 8px 10px; }
+    .sumo-map-badge strong { display: block; margin-bottom: 2px; color: var(--gold-200); font-size: 0.72rem; }
+    .sumo-map-badge span { display: block; color: #aac2d8; font-size: 0.61rem; line-height: 1.4; }
+    .sumo-legend { bottom: 10px; left: 10px; display: flex; flex-wrap: wrap; gap: 8px; padding: 6px 8px; color: #aac2d8; font-size: 0.61rem; }
+    .sumo-dot { display: inline-block; width: 9px; height: 9px; margin-right: 4px; border-radius: 50%; vertical-align: -1px; }
+    .sumo-dot.green { background: #00d99b; } .sumo-dot.yellow { background: #ffd166; } .sumo-dot.red { background: #ff5d6c; }
+    .sumo-side { display: flex; flex-direction: column; border-left: 1px solid rgba(199, 162, 82, 0.2); background: #061425; }
+    .sumo-kpis { display: grid; grid-template-columns: 1fr 1fr; border-bottom: 1px solid rgba(199, 162, 82, 0.2); }
+    .sumo-kpi { border-right: 1px solid rgba(199, 162, 82, 0.18); border-bottom: 1px solid rgba(199, 162, 82, 0.18); padding: 10px 7px; text-align: center; }
+    .sumo-kpi:nth-child(2n) { border-right: 0; }
+    .sumo-kpi-label { margin-bottom: 3px; color: #7892ad; font-size: 0.55rem; }
+    .sumo-kpi-value { color: #8ee6c4; font-size: 1.05rem; font-weight: 800; line-height: 1; }
+    .sumo-controls { border-bottom: 1px solid rgba(199, 162, 82, 0.2); padding: 9px; }
+    .sumo-control-row { margin-bottom: 8px; }
+    .sumo-control-row label { display: block; margin-bottom: 3px; color: #9bb0c4; font-size: 0.57rem; }
+    .sumo-control-row input[type="range"] { width: 100%; accent-color: var(--gold-500); }
+    .sumo-control-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5px; margin-bottom: 8px; }
+    .sumo-note { overflow-y: auto; padding: 10px; color: #9bb0c4; font-size: 0.62rem; line-height: 1.55; }
+    .sumo-tags { display: flex; flex-wrap: wrap; gap: 5px; border-top: 1px solid rgba(199, 162, 82, 0.2); padding: 8px; }
+    .sumo-tags span { border: 1px solid rgba(199, 162, 82, 0.22); border-radius: 999px; padding: 3px 6px; color: var(--gold-200); font-size: 0.55rem; }
+    .sumo-hidden { display: none !important; }
+    .sumo-scope { margin-top: 13px; color: var(--muted); font-size: 0.83rem; }
+    .leaflet-container { background: #0a1b30; font-family: Inter, Arial, sans-serif; }
+
+    .timeline { position: relative; display: grid; grid-template-columns: repeat(5, minmax(0,1fr)); gap: 12px; }
+    .timeline::before { position: absolute; left: 2%; right: 2%; top: 28px; height: 2px; background: var(--gold-200); content: ""; }
+    .timeline-card { position: relative; padding-top: 47px; }
+    .timeline-card::before {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      width: 17px;
+      height: 17px;
+      border: 4px solid var(--white);
+      border-radius: 50%;
+      background: var(--navy-700);
+      box-shadow: 0 0 0 1px var(--gold-500);
+      content: "";
+    }
+    .timeline-card time { display: block; margin-bottom: 7px; color: var(--gold-600); font-size: 0.76rem; font-weight: 900; }
+    .timeline-card h3 { font-size: 0.92rem; }
+
+    .contact-shell { display: grid; grid-template-columns: 1.22fr 0.78fr; gap: 14px; }
+    .closing { color: var(--navy-950); font-size: clamp(1.35rem, 2.5vw, 2.15rem); font-weight: 850; letter-spacing: -0.05em; line-height: 1.22; }
+    address { color: var(--muted); font-size: 0.9rem; font-style: normal; }
+    address a { color: var(--navy-700); font-weight: 800; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+
+    footer { border-top: 1px solid var(--line); background: var(--white); }
+    .footer-inner { display: flex; justify-content: space-between; gap: 16px; padding: 20px 0; color: var(--muted); font-size: 0.78rem; font-weight: 700; }
+    .cv-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      display: none;
+      place-items: center;
+      padding: 18px;
+      background: rgba(6, 28, 56, 0.74);
+      backdrop-filter: blur(8px);
+    }
+    .cv-modal:target { display: grid; }
+    .cv-modal-card {
+      display: grid;
+      width: min(100%, 980px);
+      max-height: calc(100vh - 36px);
+      grid-template-rows: auto minmax(420px, 1fr);
+      overflow: hidden;
+      border: 1px solid rgba(234, 217, 174, 0.56);
+      border-radius: var(--radius-lg);
+      background: var(--white);
+      box-shadow: 0 28px 72px rgba(6, 28, 56, 0.32);
+    }
+    .cv-modal-head { display: flex; align-items: center; justify-content: space-between; gap: 14px; padding: 14px 16px; border-bottom: 1px solid var(--line); background: var(--sand-50); }
+    .cv-modal-head h2 { font-size: 1.18rem; letter-spacing: -0.02em; }
+    .cv-modal-actions { display: flex; flex-wrap: wrap; gap: 7px; }
+    .cv-modal-actions .btn { min-height: 38px; padding: 7px 10px; font-size: 0.75rem; }
+    .cv-frame { width: 100%; height: min(76vh, 820px); border: 0; background: var(--pearl); }
+
+    @media (max-width: 1080px) {
+      .nav-links a { padding: 8px 8px; font-size: 0.71rem; }
+      .grid-4, .docs-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+      .timeline { grid-template-columns: repeat(3, minmax(0,1fr)); }
+    }
+    @media (max-width: 900px) {
+      .hero-grid, .proposal-shell, .quote-panel, .contact-shell { grid-template-columns: 1fr; }
+      .hero-side { grid-template-columns: 0.8fr 1.2fr; grid-template-rows: 1fr; }
+      .portrait, .portrait-wrap { min-height: 250px; }
+      .grid-3 { grid-template-columns: 1fr; }
+      .method-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+      .timeline { grid-template-columns: repeat(2, minmax(0,1fr)); }
+      .timeline::before { display: none; }
+    }
+    @media (max-width: 760px) {
+      html { scroll-padding-top: 78px; }
+      .container { width: min(calc(100% - 24px), var(--max-width)); }
+      .site-header { backdrop-filter: none; }
+      .nav-wrap { min-height: 66px; }
+      .brand-mark { width: 40px; height: 40px; }
+      .brand-copy strong { font-size: 0.92rem; }
+      .brand-copy span { font-size: 0.67rem; }
+      .menu-toggle { display: grid; place-items: center; }
+      .nav-links {
+        position: absolute;
+        top: 66px;
+        left: 0;
+        right: 0;
+        display: none;
+        align-items: stretch;
+        border-bottom: 1px solid var(--line);
+        padding: 12px;
+        background: var(--white);
+        box-shadow: var(--shadow-soft);
+      }
+      .nav-links.open { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); }
+      .nav-links a { padding: 9px; border: 1px solid var(--line); text-align: center; }
+      .lang-toggle { width: 100%; min-height: 37px; }
+      .hero { padding-top: 28px; }
+      .hero-main { padding: 25px; }
+      h1 { font-size: clamp(2.18rem, 11vw, 3.4rem); }
+      .hero-side { grid-template-columns: 1fr; }
+      .portrait, .portrait-wrap { min-height: 230px; max-height: 330px; }
+      .section { padding: 38px 0; }
+      .grid-2, .grid-4, .docs-grid, .timeline, .pillar-grid, .method-grid { grid-template-columns: 1fr; }
+      .flow { grid-template-columns: 1fr; }
+      .flow-step { min-height: 68px; }
+      .flow-step:not(:last-child)::after { right: auto; bottom: -16px; left: calc(50% - 5px); transform: rotate(90deg); }
+      .footer-inner { display: grid; }
+      .sumo-grid { grid-template-columns: 1fr; }
+      .sumo-side { border-top: 1px solid rgba(199, 162, 82, 0.2); border-left: 0; }
+      .sumo-map-wrap, #sumoMap { min-height: 360px; }
+      .cv-modal { padding: 8px; }
+      .cv-modal-card { max-height: calc(100vh - 16px); grid-template-rows: auto minmax(320px, 1fr); }
+      .cv-modal-head { align-items: flex-start; flex-direction: column; }
+      .cv-frame { height: 70vh; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <header class="site-header">
+    <nav class="container nav-wrap" aria-label="Primary navigation">
+      <a class="brand" href="#top" aria-label="El Ghali Sany MBA portfolio home">
+        <span class="brand-mark" aria-hidden="true">
+          <span class="brand-monogram">ES</span>
+        </span>
+        <span class="brand-copy">
+          <strong>El Ghali Sany</strong>
+          <span>Najran University MBA Portfolio</span>
+        </span>
+      </a>
+      <button class="menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="nav-links">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </button>
+      <div class="nav-links" id="nav-links">
+        <a href="#fit">Why Najran</a>
+        <a href="#narrative">Narrative</a>
+        <a href="#proposal">Proposal</a>
+        <a href="#evidence">Evidence</a>
+        <a href="#simulation">SUMO Map</a>
+        <a href="#vault">Vault</a>
+        <a href="#profile">Profile</a>
+        <a class="nav-contact" href="#contact">Contact</a>
+        <button class="lang-toggle" id="lang-toggle" type="button" aria-label="Switch to Arabic" aria-pressed="false">AR</button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main-content">
+    <section class="hero" id="top" aria-labelledby="hero-title">
+      <div class="container hero-grid">
+        <article class="hero-main">
+          <p class="micro-title" lang="ar" dir="rtl">جامعة نجران | ماجستير إدارة الأعمال</p>
+          <h1 id="hero-title">El Ghali Sany <br><span style="color:var(--navy-700)">MBA Applicant for Najran University</span></h1>
+          <p class="hero-subtitle">Business Administration | AI-Enabled Digital Transformation | Smart-City Readiness | Financial Performance</p>
+          <p class="hero-statement">I build managerial decision frameworks that connect strategy, ROI discipline, operations, data governance, stakeholder trust, and ethical business reasoning.</p>
+          <div class="cta-row">
+            <a class="btn btn-primary" href="assets/Najran_MBA_Research_Proposal_El_Ghali_Sany.docx" target="_blank" rel="noopener">View MBA Research Proposal</a>
+            <a class="btn" href="#evidence">Explore Evidence Portfolio</a>
+            <a class="btn" href="#cv-preview">Open CV</a>
+            <a class="btn btn-gold" href="#contact">Contact</a>
+          </div>
+          <div class="badge-row" aria-label="Applicant focus areas">
+            <span class="badge">Management &amp; Finance</span>
+            <span class="badge">Digital Transformation</span>
+            <span class="badge">Smart-City Readiness</span>
+            <span class="badge">Vision 2030 Fit</span>
+            <span class="badge">ROI &amp; Governance</span>
+          </div>
+        </article>
+        <aside class="hero-side" aria-label="Applicant profile summary">
+          <div class="portrait-wrap">
+            <img class="portrait" src="assets/profile-photo.png" alt="Portrait of El Ghali Sany">
+          </div>
+          <div class="hero-facts">
+            <div class="fact"><span>Applicant</span><strong>El Ghali Sany</strong></div>
+            <div class="fact"><span>Target program</span><strong>Master of Business Administration / MBA</strong></div>
+            <div class="fact"><span>College</span><strong>College of Business Administration</strong></div>
+            <div class="fact"><span>Department</span><strong>Department of Business Administration</strong></div>
+            <div class="fact"><span>Academic year</span><strong>2026/2027</strong></div>
+            <div class="fact"><span>Location</span><strong>Lyon, France</strong></div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section section-sand" id="fit" aria-labelledby="fit-title">
+      <div class="container">
+        <div class="section-head">
+          <p class="kicker">Strategic Fit</p>
+          <h2 id="fit-title">Why Najran University</h2>
+          <p>Najran University's College of Business Administration is relevant to my trajectory because its official direction connects business management, knowledge creation, scientific research, community service, and Saudi Vision 2030. This portfolio presents that fit carefully: as an applied-management direction grounded in evidence, not as a claim of admission or institutional endorsement.</p>
+          <p class="arabic" lang="ar" dir="rtl">كلية إدارة الأعمال | رؤية 2030 | التحول الرقمي | الحوكمة والأداء</p>
+        </div>
+        <div class="grid-3">
+          <article class="fit-card">
+            <span class="card-number">01</span>
+            <h3>Business Management Fit</h3>
+            <p>Strategy, operations, finance, performance measurement, and resource-allocation discipline form the managerial core of the application.</p>
+          </article>
+          <article class="fit-card">
+            <span class="card-number">02</span>
+            <h3>Research and Problem-Solving Fit</h3>
+            <p>The proposed framework is applied: it organizes public and private-sector decision needs into an auditable readiness assessment.</p>
+          </article>
+          <article class="fit-card">
+            <span class="card-number">03</span>
+            <h3>Vision 2030 and Digital Transformation Fit</h3>
+            <p>The direction is responsible technology adoption: digital maturity, AI governance, smart-city readiness, and measurable performance.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="narrative" aria-labelledby="narrative-title">
+      <div class="container">
+        <div class="quote-panel">
+          <blockquote id="narrative-title">“A high return on investment can still be a poor decision.”</blockquote>
+          <div>
+            <p>My final-year project on outdoor advertising profitability in Casablanca began as a financial problem: compare locations, costs, revenues, and ROI. The deeper lesson was managerial. Traffic volume alone is insufficient. A defensible investment decision must also account for regulation, operating costs, location quality, socio-economic context, data reliability, maintenance risk, and implementation feasibility.</p>
+            <p style="margin-top:12px">That insight now shapes my MBA research direction: transformation projects should be assessed through strategy, finance, operations, governance, trust, and ethical reasoning together.</p>
+            <div class="tag-row" aria-label="Casablanca final project methods">
+              <span class="tag">SUMO traffic simulation</span><span class="tag">GIS / QGIS mapping</span><span class="tag">Socio-economic indicators</span><span class="tag">Regulation</span><span class="tag">CAPEX</span><span class="tag">OPEX</span><span class="tag">TCO</span><span class="tag">ROI</span><span class="tag">Break-even</span><span class="tag">Potential Profitability Index</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-sand" id="academic" aria-labelledby="academic-title">
+      <div class="container">
+        <div class="section-head">
+          <p class="kicker">Academic Profile</p>
+          <h2 id="academic-title">Management foundations with an operational lens</h2>
+          <p>My academic path connects finance and accounting with procurement, operations, forecasting, and data-based decision-making.</p>
+        </div>
+        <div class="grid-2">
+          <article class="profile-card">
+            <p class="meta">Oct. 2025 - Present</p>
+            <h3>MSc Procurement and Supply Chain Management</h3>
+            <p>INSEEC Business School, Lyon, France</p>
+            <div class="tag-row">
+              <span class="tag">Procurement performance</span><span class="tag">Cost analysis</span><span class="tag">Operations management</span><span class="tag">Forecasting</span><span class="tag">KPI modelling</span><span class="tag">Data-based decisions</span>
+            </div>
+          </article>
+          <article class="profile-card">
+            <p class="meta">Sept. 2022 - Jul. 2025</p>
+            <h3>Professional Bachelor's Degree in Management - Financial and Accounting Management</h3>
+            <p>International University of Casablanca, Morocco</p>
+            <div class="tag-row">
+              <span class="tag">Accounting</span><span class="tag">Corporate finance</span><span class="tag">Management control</span><span class="tag">Statistics</span><span class="tag">Economics</span><span class="tag">Business law</span><span class="tag">Organizational management</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-navy" id="proposal" aria-labelledby="proposal-title">
+      <div class="container">
+        <div class="section-head">
+          <p class="kicker">MBA Research Proposal</p>
+          <h2 id="proposal-title">An Integrated MBA Readiness Framework for Assessing AI-Enabled Digital Transformation in Saudi Smart-City Megaprojects: A NEOM Case Study</h2>
+          <p class="arabic" lang="ar" dir="rtl">إطار جاهزية متكامل لإدارة الأعمال لتقييم التحول الرقمي المدعوم بالذكاء الاصطناعي في مشاريع المدن الذكية الكبرى في المملكة العربية السعودية</p>
+        </div>
+        <div class="proposal-shell">
+          <article class="proposal-card">
+            <h3>Managerial readiness, not technical hype.</h3>
+            <p>The project develops an MBA-level managerial assessment framework. It is not a technical AI system, not a confidential audit of NEOM, and not a claim about real implementation outcomes. NEOM is used as a bounded conceptual case setting. The research avoids confidential NEOM data and compares a generic digital-transformation checklist with an integrated readiness model.</p>
+            <div class="flow" aria-label="MBA readiness framework flow">
+              <div class="flow-step">Input</div>
+              <div class="flow-step">Six-pillar readiness framework</div>
+              <div class="flow-step">Scoring rubric</div>
+              <div class="flow-step">Scenario comparison</div>
+              <div class="flow-step">Managerial decision insight</div>
+            </div>
+            <div class="cta-row">
+              <a class="btn btn-gold" href="assets/Najran_MBA_Research_Proposal_El_Ghali_Sany.docx" target="_blank" rel="noopener">Open Research Proposal</a>
+            </div>
+          </article>
+          <div class="pillar-grid" aria-label="Six framework pillars">
+            <article class="pillar"><h3>1. Strategic Alignment</h3><p>Value creation, capability fit, and transformation priorities.</p></article>
+            <article class="pillar"><h3>2. ROI Discipline</h3><p>Investment logic, cost justification, and risk-adjusted value.</p></article>
+            <article class="pillar"><h3>3. Operational Feasibility</h3><p>Processes, skills, implementation capacity, and execution risk.</p></article>
+            <article class="pillar"><h3>4. Data Governance</h3><p>Accountability, transparency, auditability, and escalation controls.</p></article>
+            <article class="pillar"><h3>5. Stakeholder Trust</h3><p>Legitimacy, fairness, communication, and public-value expectations.</p></article>
+            <article class="pillar"><h3>6. Islamic Business Ethics</h3><p>Al-Amanah, Ihsan, and Maslaha as auditable managerial criteria.</p></article>
+          </div>
+        </div>
+        <div class="method-grid" aria-label="Research methods">
+          <article class="method-card"><p>Thematic literature synthesis</p></article>
+          <article class="method-card"><p>Directed document analysis</p></article>
+          <article class="method-card"><p>Codebook construction</p></article>
+          <article class="method-card"><p>Pilot scoring</p></article>
+          <article class="method-card"><p>Synthetic NEOM-based scenarios</p></article>
+          <article class="method-card"><p>Paired comparison</p></article>
+          <article class="method-card"><p>Coverage analysis</p></article>
+          <article class="method-card"><p>Sensitivity testing</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contribution" aria-labelledby="contribution-title">
+      <div class="container">
+        <div class="section-head">
+          <p class="kicker">Expected Contribution</p>
+          <h2 id="contribution-title">A reproducible managerial assessment tool</h2>
+          <p class="contribution panel">This portfolio positions the proposed MBA research as a reproducible managerial assessment tool for evaluating whether AI-enabled transformation projects are strategically aligned, financially disciplined, operationally realistic, governable, trusted, and ethically defensible.</p>
+        </div>
+        <div class="grid-4">
+          <article class="fit-card"><h3>For managers</h3><p>Structured readiness assessment for complex transformation decisions.</p></article>
+          <article class="fit-card"><h3>For researchers</h3><p>Auditable framework design, explicit criteria mapping, and scenario comparison.</p></article>
+          <article class="fit-card"><h3>For Saudi smart-city context</h3><p>Vision 2030-aligned governance and performance logic without slogans.</p></article>
+          <article class="fit-card"><h3>For Najran MBA</h3><p>Applied business-administration research connected to real transformation challenges.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-sand" id="evidence" aria-labelledby="evidence-title">
+      <div class="container">
+        <div class="section-head">
+          <p class="kicker">Evidence Portfolio</p>
+          <h2 id="evidence-title">Built for admissions review: evidence first, claims second.</h2>
+          <p>Four evidence lines show the progression from financial modelling to transformation governance.</p>
+        </div>
+        <div class="grid-2">
+          <article class="project-card">
+            <p class="project-type">Bachelor Final Project</p>
+            <h3>Casablanca Traffic ROI Final Project</h3>
+            <p>SUMO traffic simulation, QGIS mapping, socio-economic indicators, regulatory constraints, CAPEX, OPEX, TCO, ROI, break-even analysis, and a Potential Profitability Index.</p>
+            <p class="relevance"><strong>Managerial relevance</strong>Shows the ability to convert urban data and financial modelling into investment recommendations.</p>
+            <div class="tag-row"><a class="btn" href="assets/Casablanca_Traffic_ROI_PFE_El_Ghali_Sany.pdf" target="_blank" rel="noopener">Open PFE</a></div>
+          </article>
+          <article class="project-card">
+            <p class="project-type">Research Manuscript</p>
+            <h3>AI-MCDM Investment Scoring for Smart Cities</h3>
+            <p>XGBoost forecasting, carbon-adjusted valuation, Decoupled NPV logic, Real Options, Fuzzy-AHP, MEREC weighting, and AROMAN ranking.</p>
+            <p class="relevance"><strong>Managerial relevance</strong>Shows the ability to build transparent infrastructure decision-support tools under carbon, energy, and geoeconomic risk.</p>
+            <div class="tag-row"><a class="btn" href="assets/AI_MCDM_Investment_Scoring_for_Smart_Cities.pdf" target="_blank" rel="noopener">Open Paper</a></div>
+          </article>
+          <article class="project-card">
+            <p class="project-type">MBA Research Proposal</p>
+            <h3>Najran MBA Readiness Framework</h3>
+            <p>Strategic alignment, ROI discipline, operational feasibility, data governance, stakeholder trust, and Islamic business ethics.</p>
+            <p class="relevance"><strong>Managerial relevance</strong>Directly aligned with the Najran University MBA application.</p>
+            <div class="tag-row"><a class="btn" href="assets/Najran_MBA_Research_Proposal_El_Ghali_Sany.docx" target="_blank" rel="noopener">Open Proposal</a></div>
+          </article>
+          <article class="project-card">
+            <p class="project-type">Professional Experience</p>
+            <h3>Business Analysis and Financial Performance</h3>
+            <p>SAN MAROC, 2ACOM, and MAGHREBAIL: non-performing loan portfolio analysis, reporting automation, dashboards, ROI/CAPEX/OPEX/TCO modelling, and credit-risk exposure.</p>
+            <p class="relevance"><strong>Managerial relevance</strong>Connects analytical tools to operating constraints, reporting quality, and measurable outcomes.</p>
+            <div class="tag-row"><a class="btn" href="#experience">Review Experience</a></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="simulation" aria-labelledby="simulation-title">
+      <div class="container">
+        <div class="section-head">
+          <p class="kicker">Casablanca Empirical Evidence</p>
+          <h2 id="simulation-title">SUMO / Leaflet Traffic Simulation</h2>
+          <p>This interactive dashboard uses geo-corrected SUMO floating-car-data outputs to inspect traffic concentration and vehicle movement across five Casablanca zones. It is evidence from the bachelor final project: a spatial input for investment analysis, not a live municipal traffic feed.</p>
+        </div>
+        <div class="sumo-shell" id="sumo-dashboard">
+          <div class="sumo-heading">
+            <strong>Leaflet / SUMO Traffic Dashboard</strong>
+            <span>OpenStreetMap | SUMO FCD | 5 Casablanca zones</span>
+          </div>
+          <div class="sumo-toolbar" aria-label="SUMO dashboard modes">
+            <button class="sumo-mode active" type="button" data-sumo-mode="heatmap" aria-label="View traffic density heatmap">Heatmap</button>
+            <button class="sumo-mode" type="button" data-sumo-mode="simulation" aria-label="View SUMO vehicle simulation">Simulation</button>
+          </div>
+          <div class="sumo-toolbar" aria-label="SUMO zones">
+            <button class="sumo-zone active" type="button" data-sumo-zone="maarif" style="--zone-color:#ff5d6c">Maârif</button>
+            <button class="sumo-zone" type="button" data-sumo-zone="hay_hassani" style="--zone-color:#ffd166">Hay Hassani</button>
+            <button class="sumo-zone" type="button" data-sumo-zone="ben_msick" style="--zone-color:#00d99b">Ben M'Sick</button>
+            <button class="sumo-zone" type="button" data-sumo-zone="sidi_maarouf" style="--zone-color:#c790ff">Sidi Maârouf</button>
+            <button class="sumo-zone" type="button" data-sumo-zone="bd_mohammed_v" style="--zone-color:#4cc9f0">Bd. Mohammed V</button>
+          </div>
+          <div class="sumo-grid">
+            <div class="sumo-map-wrap">
+              <div id="sumoMap" aria-label="Interactive Casablanca SUMO traffic map"></div>
+              <canvas id="sumoCanvas" aria-hidden="true"></canvas>
+              <div class="sumo-map-badge">
+                <strong id="sumoZoneTitle">Maârif</strong>
+                <span id="sumoStatus">Preparing SUMO heatmap...</span>
+              </div>
+              <div class="sumo-legend" id="sumoHeatLegend">
+                <span><i class="sumo-dot green"></i>Low concentration</span>
+                <span><i class="sumo-dot yellow"></i>Medium</span>
+                <span><i class="sumo-dot red"></i>High</span>
+              </div>
+              <div class="sumo-legend sumo-hidden" id="sumoSimulationLegend">
+                <span><i class="sumo-dot red"></i>Slow</span>
+                <span><i class="sumo-dot yellow"></i>Medium</span>
+                <span><i class="sumo-dot green"></i>Fast</span>
+              </div>
+            </div>
+            <aside class="sumo-side" aria-label="SUMO simulation controls and indicators">
+              <div class="sumo-kpis">
+                <div class="sumo-kpi"><div class="sumo-kpi-label" id="sumoMainLabel">POINTS</div><div class="sumo-kpi-value" id="sumoKpiMain">-</div></div>
+                <div class="sumo-kpi"><div class="sumo-kpi-label">VEHICLES</div><div class="sumo-kpi-value" id="sumoKpiVehicles">-</div></div>
+                <div class="sumo-kpi"><div class="sumo-kpi-label">STEPS</div><div class="sumo-kpi-value" id="sumoKpiSteps">-</div></div>
+                <div class="sumo-kpi"><div class="sumo-kpi-label">AVG SPEED</div><div class="sumo-kpi-value" id="sumoKpiSpeed">-</div></div>
+              </div>
+              <div class="sumo-controls" id="sumoHeatControls">
+                <div class="sumo-control-row"><label for="sumoRadius">Heat radius</label><input id="sumoRadius" max="30" min="4" type="range" value="10"></div>
+                <div class="sumo-control-row"><label for="sumoBlur">Blur</label><input id="sumoBlur" max="30" min="3" type="range" value="8"></div>
+                <div class="sumo-control-row"><label for="sumoIntensity">Intensity</label><input id="sumoIntensity" max="10" min="1" type="range" value="3"></div>
+                <button class="sumo-control" id="sumoResetHeatmap" type="button">Recenter</button>
+              </div>
+              <div class="sumo-controls sumo-hidden" id="sumoSimulationControls">
+                <div class="sumo-control-grid">
+                  <button class="sumo-control" id="sumoPlay" type="button">Play</button>
+                  <button class="sumo-control" id="sumoPause" type="button">Pause</button>
+                  <button class="sumo-control" id="sumoRestart" type="button">Restart</button>
+                  <button class="sumo-control" id="sumoResetSimulation" type="button">Recenter</button>
+                </div>
+                <div class="sumo-control-row"><label for="sumoSpeed">Animation speed</label><input id="sumoSpeed" max="12" min="1" type="range" value="6"></div>
+                <div class="sumo-control-row"><label for="sumoVehicleSize">Vehicle size</label><input id="sumoVehicleSize" max="10" min="2" type="range" value="6"></div>
+              </div>
+              <div class="sumo-note" id="sumoAnalysis">Heatmap based on geo-corrected SUMO FCD outputs. Switch to Simulation to display vehicles step by step.</div>
+              <div class="sumo-tags"><span>FCD to GPS</span><span>SUMO net.xml correction</span><span>5 zones</span></div>
+            </aside>
+          </div>
+        </div>
+        <p class="sumo-scope"><strong>Data scope.</strong> The dashboard loads bundled JSON evidence from the Casablanca final project. Heatmaps and vehicle paths are analytical outputs prepared for portfolio review; they are not real-time traffic monitoring.</p>
+      </div>
+    </section>
+
+    <section class="section" id="vault" aria-labelledby="vault-title">
+      <div class="container">
+        <div class="section-head">
+          <p class="kicker">Document Vault</p>
+          <h2 id="vault-title">Application Evidence Vault</h2>
+          <p>Each card opens a real local file bundled with this portfolio. The transcript source file was supplied as `Bachelor Transcript(6).pdf` and is linked here under a clean portfolio filename.</p>
+        </div>
+        <div class="docs-grid">
+          <article class="doc-card">
+            <div><span class="doc-type">Profile</span><h3>CV</h3><p class="doc-role">Academic and professional profile for the Najran MBA application.</p></div>
+            <div class="doc-actions"><a class="btn" href="#cv-preview">Open CV</a><a class="btn" href="assets/CV_Najran_University_MBA_El_Ghali_Sany.docx" download>Download Word CV</a><span class="status">Linked</span></div>
+          </article>
+          <article class="doc-card">
+            <div><span class="doc-type">Admissions</span><h3>Statement of Purpose</h3><p class="doc-role">Motivation, academic direction, and MBA contribution statement.</p></div>
+            <div class="doc-actions"><a class="btn" href="assets/El_Ghali_Sany_Najran_University_SOP.pdf" target="_blank" rel="noopener">Open SOP</a><span class="status">Linked</span></div>
+          </article>
+          <article class="doc-card">
+            <div><span class="doc-type">Proposal</span><h3>Najran MBA Research Proposal</h3><p class="doc-role">Main research direction for Najran University's MBA program.</p></div>
+            <div class="doc-actions"><a class="btn" href="assets/Najran_MBA_Research_Proposal_El_Ghali_Sany.docx" target="_blank" rel="noopener">Open Proposal</a><span class="status">Linked</span></div>
+          </article>
+          <article class="doc-card">
+            <div><span class="doc-type">Research</span><h3>AI-MCDM Research Paper</h3><p class="doc-role">Smart-city infrastructure scoring under carbon, energy, and geoeconomic risk.</p></div>
+            <div class="doc-actions"><a class="btn" href="assets/AI_MCDM_Investment_Scoring_for_Smart_Cities.pdf" target="_blank" rel="noopener">Open Paper</a><span class="status">Linked</span></div>
+          </article>
+          <article class="doc-card">
+            <div><span class="doc-type">Final Project</span><h3>Casablanca PFE</h3><p class="doc-role">Empirical foundation: outdoor-advertising profitability and traffic analysis.</p></div>
+            <div class="doc-actions"><a class="btn" href="assets/Casablanca_Traffic_ROI_PFE_El_Ghali_Sany.pdf" target="_blank" rel="noopener">Open PFE</a><span class="status">Linked</span></div>
+          </article>
+          <article class="doc-card">
+            <div><span class="doc-type">Language</span><h3>TCF Certificate</h3><p class="doc-role">Verified French-language results: global QCM C2 and written expression B2.</p></div>
+            <div class="doc-actions"><a class="btn" href="assets/TCF_Sany_Elghali.pdf" target="_blank" rel="noopener">Open TCF</a><span class="status">Linked</span></div>
+          </article>
+          <article class="doc-card">
+            <div><span class="doc-type">Language</span><h3>TOEFL Score Report</h3><p class="doc-role">Verified English-language report: CEFR B2 / 90 equivalent.</p></div>
+            <div class="doc-actions"><a class="btn" href="assets/TOEFL_Score_Report_3095113.pdf" target="_blank" rel="noopener">Open TOEFL</a><span class="status">Linked</span></div>
+          </article>
+          <article class="doc-card">
+            <div><span class="doc-type">Academic Record</span><h3>Bachelor Transcript</h3><p class="doc-role">Academic evidence for the professional bachelor's degree.</p></div>
+            <div class="doc-actions"><a class="btn" href="assets/Bachelor_Transcript_El_Ghali_Sany.pdf" target="_blank" rel="noopener">Open Transcript</a><span class="status">Linked</span></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-sand" id="profile" aria-labelledby="language-title">
+      <div class="container">
+        <div class="section-head">
+          <p class="kicker">Language Readiness</p>
+          <h2 id="language-title">Verified language evidence</h2>
+          <p>The language profile stays within the supplied certificates: no inflated equivalencies and no claim of native fluency beyond Arabic.</p>
+        </div>
+        <div class="grid-3">
+          <article class="language-card">
+            <p class="meta">Arabic</p>
+            <p class="language-score">Native</p>
+            <h3 lang="ar" dir="rtl">العربية: اللغة الأم</h3>
+            <p>Native Arabic speaker.</p>
+          </article>
+          <article class="language-card">
+            <p class="meta">French</p>
+            <p class="language-score">C2 global QCM</p>
+            <h3>B2 written expression</h3>
+            <p>TCF global QCM: 693/699. Written expression: 13/20.</p>
+          </article>
+          <article class="language-card">
+            <p class="meta">English</p>
+            <p class="language-score">CEFR B2</p>
+            <h3>TOEFL report: 90 equivalent</h3>
+            <p>The provided TOEFL score report states CEFR B2 / 90 equivalent.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="experience" aria-labelledby="experience-title">
+      <div class="container">
+        <div class="section-head">
+          <p class="kicker">Professional Experience</p>
+          <h2 id="experience-title">From ROI modelling to transformation governance</h2>
+          <p>A decision is only strong when its assumptions are visible. These roles developed my practical exposure to performance, portfolio analysis, and reporting quality.</p>
+        </div>
+        <div class="grid-3">
+          <article class="experience-card">
+            <p class="meta">Feb. 2026 - Present</p>
+            <h3>SAN MAROC</h3>
+            <p>Business Analysis Intern - Financial Performance</p>
+            <ul>
+              <li>Non-performing loan portfolio analysis</li>
+              <li>Reporting automation</li>
+              <li>Recovery indicators and dashboards</li>
+            </ul>
+          </article>
+          <article class="experience-card">
+            <p class="meta">May 2025 - Jul. 2025</p>
+            <h3>2ACOM</h3>
+            <p>Business Analysis Intern - Performance and KPIs</p>
+            <ul>
+              <li>Five-year financial model</li>
+              <li>ROI, CAPEX, OPEX, TCO, and break-even</li>
+              <li>Advertising profitability index</li>
+            </ul>
+          </article>
+          <article class="experience-card">
+            <p class="meta">Jul. 2024 - Aug. 2024</p>
+            <h3>MAGHREBAIL</h3>
+            <p>Analysis and Reporting Intern - Client Portfolios and Risk</p>
+            <ul>
+              <li>Leasing finance</li>
+              <li>Portfolio analysis</li>
+              <li>Credit-risk monitoring</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-sand" id="timeline" aria-labelledby="timeline-title">
+      <div class="container">
+        <div class="section-head">
+          <p class="kicker">Timeline</p>
+          <h2 id="timeline-title">A focused application trajectory</h2>
+        </div>
+        <div class="timeline">
+          <article class="timeline-card"><time>2022-2025</time><h3>Professional Bachelor's Degree in Management</h3><p>Financial and Accounting Management, International University of Casablanca.</p></article>
+          <article class="timeline-card"><time>2025</time><h3>Casablanca Traffic ROI Final Project</h3><p>Outdoor-advertising profitability, SUMO, GIS, and financial modelling.</p></article>
+          <article class="timeline-card"><time>2025-Present</time><h3>MSc Procurement and Supply Chain Management</h3><p>INSEEC Business School, Lyon.</p></article>
+          <article class="timeline-card"><time>2026</time><h3>AI-MCDM Investment Scoring</h3><p>Smart-city research manuscript under carbon, energy, and geoeconomic risk.</p></article>
+          <article class="timeline-card"><time>2026/2027</time><h3>Najran University MBA Application Trajectory</h3><p>Business administration, digital transformation, governance, and performance.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contact" aria-labelledby="contact-title">
+      <div class="container">
+        <div class="section-head">
+          <p class="kicker">Final Admissions Statement</p>
+          <h2 id="contact-title">Contribution to Najran University</h2>
+        </div>
+        <div class="contact-shell">
+          <article class="contact-card">
+            <p class="closing">“My objective is to use the MBA at Najran University to strengthen my capacity to evaluate complex transformation projects where financial performance, governance, operational feasibility, stakeholder trust, ethical reasoning, and public value must be assessed together.”</p>
+            <p class="arabic" lang="ar" dir="rtl">إدارة مسؤولة، أداء قابل للقياس، وتحول رقمي موثوق.</p>
+            <div class="cta-row">
+              <a class="btn btn-primary" href="mailto:sanyghali@gmail.com">Contact Applicant</a>
+              <a class="btn" href="#cv-preview">Open CV</a>
+              <a class="btn" href="assets/Najran_MBA_Research_Proposal_El_Ghali_Sany.docx" target="_blank" rel="noopener">Open Research Proposal</a>
+            </div>
+          </article>
+          <aside class="contact-card" aria-label="Applicant contact details">
+            <h3>El Ghali Sany</h3>
+            <address>
+              Lyon, France<br>
+              <a href="mailto:sanyghali@gmail.com">sanyghali@gmail.com</a><br>
+              <a href="tel:+33781957070">+33 7 81 95 70 70</a><br>
+              LinkedIn: Elghali Sany
+            </address>
+            <div class="tag-row">
+              <span class="tag">Strategy</span><span class="tag">Finance</span><span class="tag">Operations</span><span class="tag">Data</span><span class="tag">Trust</span><span class="tag">Ethics</span>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <span>El Ghali Sany | Najran University MBA Portfolio</span>
+      <span>Academic year 2026/2027 | Evidence-first admissions review</span>
+    </div>
+  </footer>
+
+  <div class="cv-modal" id="cv-preview" role="dialog" aria-modal="true" aria-labelledby="cv-preview-title">
+    <section class="cv-modal-card">
+      <header class="cv-modal-head">
+        <h2 id="cv-preview-title">CV Preview</h2>
+        <div class="cv-modal-actions">
+          <a class="btn btn-primary" href="assets/CV_Najran_University_MBA_El_Ghali_Sany.pdf" download>Download CV PDF</a>
+          <a class="btn" href="assets/CV_Najran_University_MBA_El_Ghali_Sany.docx" download>Download Word CV</a>
+          <a class="btn" href="#top">Close CV preview</a>
+        </div>
+      </header>
+      <iframe class="cv-frame" id="cv-frame" title="El Ghali Sany CV PDF preview" src="assets/CV_Najran_University_MBA_El_Ghali_Sany.pdf#toolbar=1"></iframe>
+    </section>
+  </div>
+
+  <script>
+    const ARABIC_COPY = {
+      "Skip to main content": "تجاوز إلى المحتوى الرئيسي",
+      "Najran University MBA Portfolio": "ملف الترشح لماجستير إدارة الأعمال بجامعة نجران",
+      "Why Najran": "لماذا جامعة نجران",
+      "Narrative": "المسار الفكري",
+      "Proposal": "المقترح",
+      "Evidence": "الأدلة",
+      "SUMO Map": "خريطة SUMO",
+      "Vault": "الوثائق",
+      "Profile": "الملف الشخصي",
+      "Contact": "التواصل",
+      "Strategic Fit": "الملاءمة الاستراتيجية",
+      "Why Najran University": "لماذا جامعة نجران",
+      "Najran University's College of Business Administration is relevant to my trajectory because its official direction connects business management, knowledge creation, scientific research, community service, and Saudi Vision 2030. This portfolio presents that fit carefully: as an applied-management direction grounded in evidence, not as a claim of admission or institutional endorsement.": "تنسجم كلية إدارة الأعمال بجامعة نجران مع مساري لأن توجهها الرسمي يربط إدارة الأعمال بإنتاج المعرفة والبحث العلمي وخدمة المجتمع ورؤية السعودية 2030. ويعرض هذا الملف هذا الانسجام بحذر: بوصفه توجهاً تطبيقياً في الإدارة يستند إلى الأدلة، لا ادعاءً بالقبول أو التأييد المؤسسي.",
+      "Business Management Fit": "الملاءمة مع إدارة الأعمال",
+      "Strategy, operations, finance, performance measurement, and resource-allocation discipline form the managerial core of the application.": "تشكل الاستراتيجية والعمليات والمالية وقياس الأداء والانضباط في تخصيص الموارد جوهر هذا الترشح من منظور إداري.",
+      "Research and Problem-Solving Fit": "الملاءمة البحثية وحل المشكلات",
+      "The proposed framework is applied: it organizes public and private-sector decision needs into an auditable readiness assessment.": "الإطار المقترح تطبيقي: فهو ينظم احتياجات القرار في القطاعين العام والخاص ضمن تقييم جاهزية قابل للمراجعة.",
+      "Vision 2030 and Digital Transformation Fit": "الملاءمة مع رؤية 2030 والتحول الرقمي",
+      "The direction is responsible technology adoption: digital maturity, AI governance, smart-city readiness, and measurable performance.": "يتمثل التوجه في تبني التقنية بمسؤولية: النضج الرقمي، وحوكمة الذكاء الاصطناعي، وجاهزية المدن الذكية، والأداء القابل للقياس.",
+      "“A high return on investment can still be a poor decision.”": "«قد يكون العائد المرتفع على الاستثمار قراراً ضعيفاً رغم ذلك.»",
+      "My final-year project on outdoor advertising profitability in Casablanca began as a financial problem: compare locations, costs, revenues, and ROI. The deeper lesson was managerial. Traffic volume alone is insufficient. A defensible investment decision must also account for regulation, operating costs, location quality, socio-economic context, data reliability, maintenance risk, and implementation feasibility.": "بدأ مشروع نهاية الدراسة حول ربحية الإعلانات الخارجية في الدار البيضاء بوصفه مسألة مالية: مقارنة المواقع والتكاليف والإيرادات والعائد على الاستثمار. لكن الدرس الأعمق كان إدارياً. حجم المرور وحده لا يكفي. فالقرار الاستثماري القابل للدفاع عنه يجب أن يراعي أيضاً التنظيم والتكاليف التشغيلية وجودة الموقع والسياق الاجتماعي والاقتصادي وموثوقية البيانات ومخاطر الصيانة وقابلية التنفيذ.",
+      "That insight now shapes my MBA research direction: transformation projects should be assessed through strategy, finance, operations, governance, trust, and ethical reasoning together.": "توجه هذه الخلاصة مساري البحثي في الماجستير: ينبغي تقييم مشاريع التحول من خلال الاستراتيجية والمالية والعمليات والحوكمة والثقة والتفكير الأخلاقي معاً.",
+      "Academic Profile": "الملف الأكاديمي",
+      "Management foundations with an operational lens": "أسس إدارية بمنظور تشغيلي",
+      "My academic path connects finance and accounting with procurement, operations, forecasting, and data-based decision-making.": "يربط مساري الأكاديمي المالية والمحاسبة بالمشتريات والعمليات والتنبؤ واتخاذ القرار المبني على البيانات.",
+      "Oct. 2025 - Present": "أكتوبر 2025 - حتى الآن",
+      "MSc Procurement and Supply Chain Management": "ماجستير العلوم في المشتريات وإدارة سلسلة الإمداد",
+      "Sept. 2022 - Jul. 2025": "سبتمبر 2022 - يوليو 2025",
+      "Professional Bachelor's Degree in Management - Financial and Accounting Management": "الإجازة المهنية في الإدارة - الإدارة المالية والمحاسبية",
+      "MBA Research Proposal": "مقترح بحث ماجستير إدارة الأعمال",
+      "Managerial readiness, not technical hype.": "الجاهزية الإدارية، لا المبالغة التقنية.",
+      "The project develops an MBA-level managerial assessment framework. It is not a technical AI system, not a confidential audit of NEOM, and not a claim about real implementation outcomes. NEOM is used as a bounded conceptual case setting. The research avoids confidential NEOM data and compares a generic digital-transformation checklist with an integrated readiness model.": "يطور المشروع إطار تقييم إداري بمستوى ماجستير إدارة الأعمال. وهو ليس نظام ذكاء اصطناعي تقنياً، ولا تدقيقاً سرياً لنيوم، ولا ادعاءً بشأن نتائج تنفيذ فعلية. تُستخدم نيوم كسياق مفاهيمي محدد الحدود. ويتجنب البحث بيانات نيوم السرية ويقارن قائمة فحص عامة للتحول الرقمي بنموذج جاهزية متكامل.",
+      "Input": "المدخلات",
+      "Six-pillar readiness framework": "إطار جاهزية من ستة محاور",
+      "Scoring rubric": "سلم التقييم",
+      "Scenario comparison": "مقارنة السيناريوهات",
+      "Managerial decision insight": "رؤية إدارية للقرار",
+      "Open Research Proposal": "فتح مقترح البحث",
+      "1. Strategic Alignment": "1. المواءمة الاستراتيجية",
+      "2. ROI Discipline": "2. انضباط العائد على الاستثمار",
+      "3. Operational Feasibility": "3. القابلية التشغيلية",
+      "4. Data Governance": "4. حوكمة البيانات",
+      "5. Stakeholder Trust": "5. ثقة أصحاب المصلحة",
+      "6. Islamic Business Ethics": "6. أخلاقيات الأعمال الإسلامية",
+      "Expected Contribution": "المساهمة المتوقعة",
+      "A reproducible managerial assessment tool": "أداة تقييم إداري قابلة لإعادة الاستخدام",
+      "This portfolio positions the proposed MBA research as a reproducible managerial assessment tool for evaluating whether AI-enabled transformation projects are strategically aligned, financially disciplined, operationally realistic, governable, trusted, and ethically defensible.": "يقدم هذا الملف البحث المقترح للماجستير بوصفه أداة تقييم إداري قابلة لإعادة الاستخدام لتحديد ما إذا كانت مشاريع التحول المدعومة بالذكاء الاصطناعي منسجمة استراتيجياً ومنضبطة مالياً وواقعية تشغيلياً وقابلة للحوكمة وموثوقة ويمكن الدفاع عنها أخلاقياً.",
+      "For managers": "للمديرين",
+      "For researchers": "للباحثين",
+      "For Saudi smart-city context": "لسياق المدن الذكية السعودية",
+      "For Najran MBA": "لماجستير جامعة نجران",
+      "Evidence Portfolio": "ملف الأدلة",
+      "Built for admissions review: evidence first, claims second.": "مصمم لمراجعة القبول: الأدلة أولاً، والادعاءات ثانياً.",
+      "Four evidence lines show the progression from financial modelling to transformation governance.": "تعرض أربعة مسارات للأدلة الانتقال من النمذجة المالية إلى حوكمة التحول.",
+      "Bachelor Final Project": "مشروع نهاية الدراسة",
+      "Casablanca Traffic ROI Final Project": "مشروع الدار البيضاء النهائي: المرور والعائد على الاستثمار",
+      "Research Manuscript": "ورقة بحثية",
+      "AI-MCDM Investment Scoring for Smart Cities": "تقييم استثمارات المدن الذكية باستخدام AI-MCDM",
+      "Najran MBA Readiness Framework": "إطار الجاهزية لماجستير جامعة نجران",
+      "Professional Experience": "الخبرة المهنية",
+      "Business Analysis and Financial Performance": "تحليل الأعمال والأداء المالي",
+      "Open PFE": "فتح مشروع التخرج",
+      "Open Paper": "فتح الورقة البحثية",
+      "Open Proposal": "فتح المقترح",
+      "Review Experience": "مراجعة الخبرة",
+      "Casablanca Empirical Evidence": "أدلة تطبيقية من الدار البيضاء",
+      "SUMO / Leaflet Traffic Simulation": "محاكاة المرور باستخدام SUMO وLeaflet",
+      "This interactive dashboard uses geo-corrected SUMO floating-car-data outputs to inspect traffic concentration and vehicle movement across five Casablanca zones. It is evidence from the bachelor final project: a spatial input for investment analysis, not a live municipal traffic feed.": "تستخدم هذه اللوحة التفاعلية مخرجات SUMO المصححة جغرافياً لبيانات المركبات المتحركة بهدف فحص كثافة المرور وحركة المركبات في خمس مناطق بالدار البيضاء. وهي دليل من مشروع نهاية الدراسة: مدخل مكاني للتحليل الاستثماري، وليست تغذية حية لحركة المرور البلدية.",
+      "Leaflet / SUMO Traffic Dashboard": "لوحة المرور Leaflet / SUMO",
+      "Heatmap": "الخريطة الحرارية",
+      "Simulation": "المحاكاة",
+      "Low concentration": "كثافة منخفضة",
+      "Medium": "متوسطة",
+      "High": "مرتفعة",
+      "Slow": "بطيء",
+      "Fast": "سريع",
+      "Heat radius": "نطاق الحرارة",
+      "Blur": "التمويه",
+      "Intensity": "الكثافة",
+      "Recenter": "إعادة التوسيط",
+      "Play": "تشغيل",
+      "Pause": "إيقاف مؤقت",
+      "Restart": "إعادة التشغيل",
+      "Animation speed": "سرعة الحركة",
+      "Vehicle size": "حجم المركبة",
+      "Data scope.": "نطاق البيانات.",
+      "The dashboard loads bundled JSON evidence from the Casablanca final project. Heatmaps and vehicle paths are analytical outputs prepared for portfolio review; they are not real-time traffic monitoring.": "تحمّل اللوحة ملفات JSON المرفقة من مشروع الدار البيضاء النهائي. الخرائط الحرارية ومسارات المركبات مخرجات تحليلية أُعدت لمراجعة الملف، وليست مراقبة لحركة المرور في الوقت الفعلي.",
+      "Document Vault": "مستودع الوثائق",
+      "Application Evidence Vault": "مستودع أدلة الترشح",
+      "Each card opens a real local file bundled with this portfolio. The transcript source file was supplied as `Bachelor Transcript(6).pdf` and is linked here under a clean portfolio filename.": "تفتح كل بطاقة ملفاً محلياً حقيقياً مرفقاً بهذا الملف. وقد تم توفير كشف الدرجات باسم Bachelor Transcript(6).pdf وربطه هنا باسم واضح داخل ملف الترشح.",
+      "CV": "السيرة الذاتية",
+      "Statement of Purpose": "خطاب الغرض",
+      "Najran MBA Research Proposal": "مقترح بحث ماجستير جامعة نجران",
+      "AI-MCDM Research Paper": "ورقة بحث AI-MCDM",
+      "Casablanca PFE": "مشروع تخرج الدار البيضاء",
+      "TCF Certificate": "شهادة TCF",
+      "TOEFL Score Report": "تقرير درجة TOEFL",
+      "Bachelor Transcript": "كشف درجات الإجازة",
+      "Open CV": "فتح السيرة الذاتية",
+      "Download Word CV": "تنزيل السيرة الذاتية بصيغة Word",
+      "CV Preview": "معاينة السيرة الذاتية",
+      "Download CV PDF": "تنزيل السيرة الذاتية بصيغة PDF",
+      "Close CV preview": "إغلاق معاينة السيرة الذاتية",
+      "El Ghali Sany CV PDF preview": "معاينة السيرة الذاتية لـ El Ghali Sany بصيغة PDF",
+      "Open SOP": "فتح خطاب الغرض",
+      "Open TCF": "فتح شهادة TCF",
+      "Open TOEFL": "فتح تقرير TOEFL",
+      "Open Transcript": "فتح كشف الدرجات",
+      "Linked": "مرتبط",
+      "Language Readiness": "الجاهزية اللغوية",
+      "Verified language evidence": "أدلة لغوية موثقة",
+      "The language profile stays within the supplied certificates: no inflated equivalencies and no claim of native fluency beyond Arabic.": "يلتزم الملف اللغوي بالشهادات المقدمة: دون مبالغة في المعادلات ودون ادعاء إجادة أصلية لأي لغة غير العربية.",
+      "Arabic": "العربية",
+      "Native": "اللغة الأم",
+      "Native Arabic speaker.": "العربية هي اللغة الأم.",
+      "French": "الفرنسية",
+      "B2 written expression": "B2 في التعبير الكتابي",
+      "English": "الإنجليزية",
+      "TOEFL report: 90 equivalent": "تقرير TOEFL: ما يعادل 90",
+      "The provided TOEFL score report states CEFR B2 / 90 equivalent.": "ينص تقرير TOEFL المرفق على المستوى CEFR B2 / ما يعادل 90.",
+      "From ROI modelling to transformation governance": "من نمذجة العائد على الاستثمار إلى حوكمة التحول",
+      "Timeline": "المسار الزمني",
+      "A focused application trajectory": "مسار ترشح واضح",
+      "Final Admissions Statement": "البيان الختامي للترشح",
+      "Contribution to Najran University": "المساهمة في جامعة نجران",
+      "Contact Applicant": "التواصل مع المترشح",
+      "Academic year 2026/2027 | Evidence-first admissions review": "السنة الأكاديمية 2026/2027 | مراجعة قبول تبدأ بالأدلة",
+      "Open navigation menu": "فتح قائمة التنقل",
+      "Close navigation menu": "إغلاق قائمة التنقل",
+      "Switch to Arabic": "التبديل إلى العربية",
+      "Switch to English": "التبديل إلى الإنجليزية",
+      "View traffic density heatmap": "عرض الخريطة الحرارية لكثافة المرور",
+      "View SUMO vehicle simulation": "عرض محاكاة مركبات SUMO",
+      "POINTS": "النقاط",
+      "VISIBLE": "الظاهر",
+      "VEHICLES": "المركبات",
+      "STEPS": "الخطوات",
+      "AVG SPEED": "متوسط السرعة",
+      "Loading SUMO heatmap...": "جار تحميل الخريطة الحرارية من SUMO...",
+      "Loading SUMO geo simulation...": "جار تحميل محاكاة SUMO الجغرافية...",
+      "Heatmap based on geo-corrected SUMO FCD outputs. Switch to Simulation to display vehicles step by step.": "تعتمد الخريطة الحرارية على مخرجات SUMO FCD المصححة جغرافياً. انتقل إلى وضع المحاكاة لعرض المركبات خطوة بخطوة.",
+      "Maârif: central dense fabric. The heatmap highlights traffic concentration; simulation mode displays vehicles from geo-corrected SUMO FCD outputs.": "المعاريف: نسيج مركزي كثيف. تبرز الخريطة الحرارية تركّز المرور، ويعرض وضع المحاكاة المركبات من مخرجات SUMO FCD المصححة جغرافياً.",
+      "Hay Hassani: peripheral flows and transition zones. This view helps identify localized slowdowns and vehicle accumulation.": "الحي الحسني: تدفقات طرفية ومناطق انتقال. يساعد هذا العرض في تحديد التباطؤ الموضعي وتراكم المركبات.",
+      "Ben M'Sick: dense urban network. The dashboard supports review of secondary-road intensity, conflict points, and speed variations.": "بن مسيك: شبكة حضرية كثيفة. تدعم اللوحة مراجعة كثافة الطرق الثانوية ونقاط التعارض وتغيرات السرعة.",
+      "Sidi Maârouf: strategic employment and arterial area. Simulation mode shows flows linked to business poles and major roads.": "سيدي معروف: منطقة استراتيجية للأعمال والمحاور الطرقية. يعرض وضع المحاكاة التدفقات المرتبطة بأقطاب الأعمال والطرق الرئيسية.",
+      "Boulevard Mohammed V: major corridor. Heatmap and simulation views identify concentration and slowdown segments.": "شارع محمد الخامس: محور رئيسي. تحدد الخريطة الحرارية والمحاكاة مقاطع التركّز والتباطؤ.",
+      "MBA Applicant for Najran University": "مترشح لماجستير إدارة الأعمال بجامعة نجران",
+      "Business Administration | AI-Enabled Digital Transformation | Smart-City Readiness | Financial Performance": "إدارة الأعمال | التحول الرقمي المدعوم بالذكاء الاصطناعي | جاهزية المدن الذكية | الأداء المالي",
+      "I build managerial decision frameworks that connect strategy, ROI discipline, operations, data governance, stakeholder trust, and ethical business reasoning.": "أبني أطر قرار إدارية تربط الاستراتيجية بانضباط العائد على الاستثمار والعمليات وحوكمة البيانات وثقة أصحاب المصلحة والتفكير الأخلاقي في الأعمال.",
+      "View MBA Research Proposal": "عرض مقترح بحث الماجستير",
+      "Explore Evidence Portfolio": "استكشاف ملف الأدلة",
+      "Management & Finance": "الإدارة والمالية",
+      "Digital Transformation": "التحول الرقمي",
+      "Smart-City Readiness": "جاهزية المدن الذكية",
+      "Vision 2030 Fit": "الملاءمة مع رؤية 2030",
+      "ROI & Governance": "العائد والحوكمة",
+      "Applicant": "المترشح",
+      "Target program": "البرنامج المستهدف",
+      "Master of Business Administration / MBA": "ماجستير إدارة الأعمال / MBA",
+      "College": "الكلية",
+      "College of Business Administration": "كلية إدارة الأعمال",
+      "Department": "القسم",
+      "Department of Business Administration": "قسم إدارة الأعمال",
+      "Academic year": "السنة الأكاديمية",
+      "Location": "الموقع",
+      "SUMO traffic simulation": "محاكاة المرور SUMO",
+      "GIS / QGIS mapping": "رسم الخرائط GIS / QGIS",
+      "Socio-economic indicators": "المؤشرات الاجتماعية والاقتصادية",
+      "Regulation": "التنظيم",
+      "Break-even": "نقطة التعادل",
+      "Potential Profitability Index": "مؤشر الربحية المحتملة",
+      "Procurement performance": "أداء المشتريات",
+      "Cost analysis": "تحليل التكاليف",
+      "Operations management": "إدارة العمليات",
+      "Forecasting": "التنبؤ",
+      "KPI modelling": "نمذجة مؤشرات الأداء",
+      "Data-based decisions": "قرارات مبنية على البيانات",
+      "Accounting": "المحاسبة",
+      "Corporate finance": "مالية الشركات",
+      "Management control": "مراقبة التسيير",
+      "Statistics": "الإحصاء",
+      "Economics": "الاقتصاد",
+      "Business law": "قانون الأعمال",
+      "Organizational management": "الإدارة التنظيمية",
+      "An Integrated MBA Readiness Framework for Assessing AI-Enabled Digital Transformation in Saudi Smart-City Megaprojects: A NEOM Case Study": "إطار جاهزية متكامل لماجستير إدارة الأعمال لتقييم التحول الرقمي المدعوم بالذكاء الاصطناعي في مشاريع المدن الذكية الكبرى في السعودية: دراسة حالة نيوم",
+      "Value creation, capability fit, and transformation priorities.": "خلق القيمة وملاءمة القدرات وأولويات التحول.",
+      "Investment logic, cost justification, and risk-adjusted value.": "منطق الاستثمار وتبرير التكلفة والقيمة المعدلة حسب المخاطر.",
+      "Processes, skills, implementation capacity, and execution risk.": "العمليات والمهارات والقدرة على التنفيذ ومخاطر الإنجاز.",
+      "Accountability, transparency, auditability, and escalation controls.": "المساءلة والشفافية وقابلية التدقيق وضوابط التصعيد.",
+      "Legitimacy, fairness, communication, and public-value expectations.": "المشروعية والإنصاف والتواصل وتوقعات القيمة العامة.",
+      "Al-Amanah, Ihsan, and Maslaha as auditable managerial criteria.": "الأمانة والإحسان والمصلحة بوصفها معايير إدارية قابلة للتدقيق.",
+      "Thematic literature synthesis": "توليف موضوعي للأدبيات",
+      "Directed document analysis": "تحليل موجّه للوثائق",
+      "Codebook construction": "بناء دليل الترميز",
+      "Pilot scoring": "تقييم تجريبي",
+      "Synthetic NEOM-based scenarios": "سيناريوهات تركيبية مستندة إلى نيوم",
+      "Paired comparison": "مقارنة مزدوجة",
+      "Coverage analysis": "تحليل التغطية",
+      "Sensitivity testing": "اختبار الحساسية",
+      "Structured readiness assessment for complex transformation decisions.": "تقييم منظم للجاهزية في قرارات التحول المعقدة.",
+      "Auditable framework design, explicit criteria mapping, and scenario comparison.": "تصميم إطار قابل للتدقيق، وربط واضح للمعايير، ومقارنة للسيناريوهات.",
+      "Vision 2030-aligned governance and performance logic without slogans.": "منطق للحوكمة والأداء ينسجم مع رؤية 2030 دون شعارات.",
+      "Applied business-administration research connected to real transformation challenges.": "بحث تطبيقي في إدارة الأعمال مرتبط بتحديات التحول الفعلية.",
+      "SUMO traffic simulation, QGIS mapping, socio-economic indicators, regulatory constraints, CAPEX, OPEX, TCO, ROI, break-even analysis, and a Potential Profitability Index.": "محاكاة المرور SUMO، ورسم الخرائط QGIS، والمؤشرات الاجتماعية والاقتصادية، والقيود التنظيمية، وCAPEX وOPEX وTCO وROI، وتحليل نقطة التعادل، ومؤشر الربحية المحتملة.",
+      "Managerial relevance": "الأهمية الإدارية",
+      "Shows the ability to convert urban data and financial modelling into investment recommendations.": "يُظهر القدرة على تحويل البيانات الحضرية والنمذجة المالية إلى توصيات استثمارية.",
+      "XGBoost forecasting, carbon-adjusted valuation, Decoupled NPV logic, Real Options, Fuzzy-AHP, MEREC weighting, and AROMAN ranking.": "التنبؤ باستخدام XGBoost، والتقييم المعدل للكربون، ومنطق DNPV، والخيارات الحقيقية، وFuzzy-AHP، وأوزان MEREC، وترتيب AROMAN.",
+      "Shows the ability to build transparent infrastructure decision-support tools under carbon, energy, and geoeconomic risk.": "يُظهر القدرة على بناء أدوات شفافة لدعم قرار البنية التحتية في ظل مخاطر الكربون والطاقة والمخاطر الجيو-اقتصادية.",
+      "Strategic alignment, ROI discipline, operational feasibility, data governance, stakeholder trust, and Islamic business ethics.": "المواءمة الاستراتيجية، وانضباط العائد على الاستثمار، والقابلية التشغيلية، وحوكمة البيانات، وثقة أصحاب المصلحة، وأخلاقيات الأعمال الإسلامية.",
+      "Directly aligned with the Najran University MBA application.": "منسجم مباشرة مع الترشح لماجستير إدارة الأعمال بجامعة نجران.",
+      "SAN MAROC, 2ACOM, and MAGHREBAIL: non-performing loan portfolio analysis, reporting automation, dashboards, ROI/CAPEX/OPEX/TCO modelling, and credit-risk exposure.": "SAN MAROC و2ACOM وMAGHREBAIL: تحليل محفظة القروض المتعثرة، وأتمتة التقارير، ولوحات المتابعة، ونمذجة ROI وCAPEX وOPEX وTCO، والتعرض لمخاطر الائتمان.",
+      "Connects analytical tools to operating constraints, reporting quality, and measurable outcomes.": "يربط الأدوات التحليلية بالقيود التشغيلية وجودة التقارير والنتائج القابلة للقياس.",
+      "OpenStreetMap | SUMO FCD | 5 Casablanca zones": "OpenStreetMap | مخرجات SUMO FCD | خمس مناطق بالدار البيضاء",
+      "FCD to GPS": "من FCD إلى GPS",
+      "SUMO net.xml correction": "تصحيح SUMO net.xml",
+      "5 zones": "خمس مناطق",
+      "Profile": "الملف الشخصي",
+      "Admissions": "القبول",
+      "Research": "البحث",
+      "Final Project": "مشروع التخرج",
+      "Language": "اللغة",
+      "Academic Record": "السجل الأكاديمي",
+      "Academic and professional profile for the Najran MBA application.": "الملف الأكاديمي والمهني للترشح لماجستير إدارة الأعمال بجامعة نجران.",
+      "Motivation, academic direction, and MBA contribution statement.": "الدافع والتوجه الأكاديمي وبيان المساهمة في برنامج الماجستير.",
+      "Main research direction for Najran University's MBA program.": "التوجه البحثي الرئيسي لبرنامج ماجستير إدارة الأعمال بجامعة نجران.",
+      "Smart-city infrastructure scoring under carbon, energy, and geoeconomic risk.": "تقييم البنية التحتية للمدن الذكية في ظل مخاطر الكربون والطاقة والمخاطر الجيو-اقتصادية.",
+      "Empirical foundation: outdoor-advertising profitability and traffic analysis.": "الأساس التطبيقي: ربحية الإعلانات الخارجية وتحليل المرور.",
+      "Verified French-language results: global QCM C2 and written expression B2.": "نتائج موثقة للغة الفرنسية: اختبار QCM العام بمستوى C2 والتعبير الكتابي بمستوى B2.",
+      "Verified English-language report: CEFR B2 / 90 equivalent.": "تقرير موثق للغة الإنجليزية: CEFR B2 / ما يعادل 90.",
+      "Academic evidence for the professional bachelor's degree.": "دليل أكاديمي للإجازة المهنية.",
+      "TCF global QCM: 693/699. Written expression: 13/20.": "اختبار TCF العام QCM: 693/699. التعبير الكتابي: 13/20.",
+      "A decision is only strong when its assumptions are visible. These roles developed my practical exposure to performance, portfolio analysis, and reporting quality.": "لا يكون القرار قوياً إلا عندما تكون افتراضاته واضحة. وقد طورت هذه الأدوار خبرتي التطبيقية في الأداء وتحليل المحافظ وجودة التقارير.",
+      "Feb. 2026 - Present": "فبراير 2026 - حتى الآن",
+      "May 2025 - Jul. 2025": "مايو 2025 - يوليو 2025",
+      "Jul. 2024 - Aug. 2024": "يوليو 2024 - أغسطس 2024",
+      "Business Analysis Intern - Financial Performance": "متدرب في تحليل الأعمال - الأداء المالي",
+      "Non-performing loan portfolio analysis": "تحليل محفظة القروض المتعثرة",
+      "Reporting automation": "أتمتة التقارير",
+      "Recovery indicators and dashboards": "مؤشرات الاسترداد ولوحات المتابعة",
+      "Business Analysis Intern - Performance and KPIs": "متدرب في تحليل الأعمال - الأداء ومؤشرات القياس",
+      "Five-year financial model": "نموذج مالي لخمس سنوات",
+      "Advertising profitability index": "مؤشر ربحية الإعلانات",
+      "Analysis and Reporting Intern - Client Portfolios and Risk": "متدرب في التحليل والتقارير - محافظ العملاء والمخاطر",
+      "Leasing finance": "تمويل التأجير",
+      "Portfolio analysis": "تحليل المحافظ",
+      "Credit-risk monitoring": "متابعة مخاطر الائتمان",
+      "Professional Bachelor's Degree in Management": "الإجازة المهنية في الإدارة",
+      "Financial and Accounting Management, International University of Casablanca.": "الإدارة المالية والمحاسبية، الجامعة الدولية للدار البيضاء.",
+      "Outdoor-advertising profitability, SUMO, GIS, and financial modelling.": "ربحية الإعلانات الخارجية، وSUMO، وGIS، والنمذجة المالية.",
+      "AI-MCDM Investment Scoring": "تقييم الاستثمار باستخدام AI-MCDM",
+      "Smart-city research manuscript under carbon, energy, and geoeconomic risk.": "ورقة بحثية حول المدن الذكية في ظل مخاطر الكربون والطاقة والمخاطر الجيو-اقتصادية.",
+      "Najran University MBA Application Trajectory": "مسار الترشح لماجستير إدارة الأعمال بجامعة نجران",
+      "Business administration, digital transformation, governance, and performance.": "إدارة الأعمال والتحول الرقمي والحوكمة والأداء.",
+      "“My objective is to use the MBA at Najran University to strengthen my capacity to evaluate complex transformation projects where financial performance, governance, operational feasibility, stakeholder trust, ethical reasoning, and public value must be assessed together.”": "«هدفي هو الاستفادة من ماجستير إدارة الأعمال بجامعة نجران لتعزيز قدرتي على تقييم مشاريع التحول المعقدة التي ينبغي فيها تقييم الأداء المالي والحوكمة والقابلية التشغيلية وثقة أصحاب المصلحة والتفكير الأخلاقي والقيمة العامة معاً.»",
+      "Strategy": "الاستراتيجية",
+      "Finance": "المالية",
+      "Operations": "العمليات",
+      "Data": "البيانات",
+      "Trust": "الثقة",
+      "Ethics": "الأخلاقيات"
+    };
+    const originalText = new WeakMap();
+    const originalAttributes = new WeakMap();
+    const localize = (value) => document.body.classList.contains("rtl") ? (ARABIC_COPY[value] || value) : value;
+
+    function translateNode(node, arabic) {
+      if (!originalText.has(node)) originalText.set(node, node.nodeValue);
+      const source = originalText.get(node);
+      const match = source.match(/^(\s*)(.*?)(\s*)$/s);
+      if (!match || !match[2]) return;
+      node.nodeValue = arabic ? `${match[1]}${ARABIC_COPY[match[2]] || match[2]}${match[3]}` : source;
+    }
+
+    function translateAttributes(element, arabic) {
+      const attributes = ["aria-label", "title"];
+      if (!originalAttributes.has(element)) originalAttributes.set(element, {});
+      const stored = originalAttributes.get(element);
+      attributes.forEach((attribute) => {
+        if (!element.hasAttribute(attribute)) return;
+        if (!(attribute in stored)) stored[attribute] = element.getAttribute(attribute);
+        element.setAttribute(attribute, arabic ? (ARABIC_COPY[stored[attribute]] || stored[attribute]) : stored[attribute]);
+      });
+    }
+
+    function translatePage(arabic) {
+      document.body.classList.toggle("rtl", arabic);
+      document.documentElement.lang = arabic ? "ar" : "en";
+      document.documentElement.dir = arabic ? "rtl" : "ltr";
+      const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
+        acceptNode(node) {
+          return ["SCRIPT", "STYLE"].includes(node.parentElement?.tagName) ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT;
+        }
+      });
+      while (walker.nextNode()) translateNode(walker.currentNode, arabic);
+      document.querySelectorAll("[aria-label], [title]").forEach((element) => translateAttributes(element, arabic));
+      const toggle = document.getElementById("lang-toggle");
+      toggle.textContent = arabic ? "EN" : "AR";
+      toggle.setAttribute("aria-pressed", String(arabic));
+      toggle.setAttribute("aria-label", arabic ? ARABIC_COPY["Switch to English"] : "Switch to Arabic");
+      localStorage.setItem("najran-portfolio-language", arabic ? "ar" : "en");
+      window.dispatchEvent(new CustomEvent("portfolio-language-change", { detail: { arabic } }));
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const toggle = document.getElementById("lang-toggle");
+      toggle.addEventListener("click", () => translatePage(!document.body.classList.contains("rtl")));
+      if (localStorage.getItem("najran-portfolio-language") === "ar") translatePage(true);
+    });
+  </script>
+  <script src="vendor/leaflet.min.js"></script>
+  <script src="vendor/leaflet-heat.js"></script>
+  <script>
+    (() => {
+      const zones = {
+        maarif: {
+          label: "Maârif", center: [33.5866, -7.6325], zoom: 14,
+          heatmap: "data/traffic/maarif_heatmap.json", simulation: "data/traffic/maarif_simulation_geo.json",
+          analysis: "Maârif: central dense fabric. The heatmap highlights traffic concentration; simulation mode displays vehicles from geo-corrected SUMO FCD outputs."
+        },
+        hay_hassani: {
+          label: "Hay Hassani", center: [33.5607, -7.6900], zoom: 14,
+          heatmap: "data/traffic/hay_hassani_heatmap.json", simulation: "data/traffic/hay_hassani_simulation_geo.json",
+          analysis: "Hay Hassani: peripheral flows and transition zones. This view helps identify localized slowdowns and vehicle accumulation."
+        },
+        ben_msick: {
+          label: "Ben M'Sick", center: [33.5500, -7.5800], zoom: 14,
+          heatmap: "data/traffic/ben_msick_heatmap.json", simulation: "data/traffic/ben_msick_simulation_geo.json",
+          analysis: "Ben M'Sick: dense urban network. The dashboard supports review of secondary-road intensity, conflict points, and speed variations."
+        },
+        sidi_maarouf: {
+          label: "Sidi Maârouf", center: [33.5250, -7.6500], zoom: 14,
+          heatmap: "data/traffic/sidi_maarouf_heatmap.json", simulation: "data/traffic/sidi_maarouf_simulation_geo.json",
+          analysis: "Sidi Maârouf: strategic employment and arterial area. Simulation mode shows flows linked to business poles and major roads."
+        },
+        bd_mohammed_v: {
+          label: "Bd. Mohammed V", center: [33.5950, -7.6100], zoom: 15,
+          heatmap: "data/traffic/bd_mohammed_v_heatmap.json", simulation: "data/traffic/bd_mohammed_v_simulation_geo.json",
+          analysis: "Boulevard Mohammed V: major corridor. Heatmap and simulation views identify concentration and slowdown segments."
+        }
+      };
+      const maxHeatPoints = 12000;
+      const maxVehiclesPerFrame = 1600;
+      const byId = (id) => document.getElementById(id);
+      const setText = (id, value) => { const element = byId(id); if (element) element.textContent = localize(value); };
+      let map = null;
+      let heatLayer = null;
+      let canvas = null;
+      let context = null;
+      let mode = "heatmap";
+      let zoneKey = "maarif";
+      let currentData = null;
+      let heatPoints = [];
+      let stepIndex = 0;
+      let playing = false;
+      let animationFrame = null;
+      let lastFrame = 0;
+
+      async function loadJson(path) {
+        const response = await fetch(path);
+        if (!response.ok) throw new Error(path);
+        return response.json();
+      }
+
+      function resizeCanvas() {
+        if (!canvas || !context) return;
+        const rect = canvas.getBoundingClientRect();
+        const density = window.devicePixelRatio || 1;
+        canvas.width = rect.width * density;
+        canvas.height = rect.height * density;
+        context.setTransform(density, 0, 0, density, 0, 0);
+      }
+
+      function clearCanvas() {
+        if (!canvas || !context) return;
+        const rect = canvas.getBoundingClientRect();
+        context.clearRect(0, 0, rect.width, rect.height);
+      }
+
+      function removeHeat() {
+        if (map && heatLayer) map.removeLayer(heatLayer);
+        heatLayer = null;
+      }
+
+      function initMap() {
+        if (!window.L) {
+          setText("sumoStatus", "Leaflet library unavailable. Reload with internet access to display the map.");
+          return false;
+        }
+        const zone = zones[zoneKey];
+        map = L.map("sumoMap", { center: zone.center, zoom: zone.zoom, zoomControl: true, attributionControl: true, preferCanvas: true });
+        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+          maxZoom: 19,
+          attribution: "&copy; OpenStreetMap contributors"
+        }).addTo(map);
+        canvas = byId("sumoCanvas");
+        context = canvas.getContext("2d");
+        resizeCanvas();
+        map.on("move zoom resize", () => { resizeCanvas(); if (mode === "simulation") drawStep(); });
+        window.addEventListener("resize", () => { resizeCanvas(); if (mode === "simulation") drawStep(); });
+        return true;
+      }
+
+      function updateUI() {
+        const heatmapMode = mode === "heatmap";
+        const zone = zones[zoneKey];
+        document.querySelectorAll(".sumo-mode").forEach((button) => button.classList.toggle("active", button.dataset.sumoMode === mode));
+        document.querySelectorAll(".sumo-zone").forEach((button) => button.classList.toggle("active", button.dataset.sumoZone === zoneKey));
+        byId("sumoHeatControls").classList.toggle("sumo-hidden", !heatmapMode);
+        byId("sumoSimulationControls").classList.toggle("sumo-hidden", heatmapMode);
+        byId("sumoHeatLegend").classList.toggle("sumo-hidden", !heatmapMode);
+        byId("sumoSimulationLegend").classList.toggle("sumo-hidden", heatmapMode);
+        setText("sumoZoneTitle", zone.label);
+        setText("sumoAnalysis", zone.analysis);
+        setText("sumoMainLabel", heatmapMode ? "POINTS" : "VISIBLE");
+        ["sumoKpiMain", "sumoKpiVehicles", "sumoKpiSteps", "sumoKpiSpeed"].forEach((id) => setText(id, "-"));
+      }
+
+      async function loadCurrent() {
+        if (!map) return;
+        cancelAnimationFrame(animationFrame);
+        animationFrame = null;
+        playing = false;
+        stepIndex = 0;
+        removeHeat();
+        clearCanvas();
+        updateUI();
+        const zone = zones[zoneKey];
+        map.setView(zone.center, zone.zoom);
+        if (mode === "heatmap") await loadHeatmap();
+        else await loadSimulation();
+      }
+
+      function normalizeHeat(points) {
+        const normalized = [];
+        points.forEach((point) => {
+          if (!Array.isArray(point) || point.length < 2) return;
+          const lat = Number(point[0]);
+          const lng = Number(point[1]);
+          const intensity = Number(point[2] || 0.4);
+          if (Number.isFinite(lat) && Number.isFinite(lng)) normalized.push([lat, lng, Math.max(0.05, Math.min(intensity, 1))]);
+        });
+        if (normalized.length <= maxHeatPoints) return normalized;
+        const interval = Math.ceil(normalized.length / maxHeatPoints);
+        return normalized.filter((_, index) => index % interval === 0).slice(0, maxHeatPoints);
+      }
+
+      function fitPoints(points) {
+        if (!map || !points || !points.length) return;
+        const bounds = L.latLngBounds(points.map((point) => [point[0], point[1]]));
+        if (bounds.isValid()) map.fitBounds(bounds, { padding: [30, 30], maxZoom: zones[zoneKey].zoom });
+      }
+
+      function drawHeatmap() {
+        removeHeat();
+        if (!map || !heatPoints.length || !L.heatLayer) return;
+        const radius = Number(byId("sumoRadius").value);
+        const blur = Number(byId("sumoBlur").value);
+        const multiplier = Number(byId("sumoIntensity").value) / 12;
+        const points = heatPoints.map((point) => [point[0], point[1], Math.min(0.55, point[2] * multiplier)]);
+        heatLayer = L.heatLayer(points, {
+          radius, blur, maxZoom: 18, minOpacity: 0.08, max: 1,
+          gradient: { 0.15: "#00d99b", 0.35: "#ffd166", 0.6: "#ff9f43", 1: "#ff5d6c" }
+        }).addTo(map);
+        fitPoints(points);
+      }
+
+      function updateHeatKpis() {
+        const kpis = currentData.kpis || {};
+        setText("sumoKpiMain", heatPoints.length.toLocaleString("en-US"));
+        setText("sumoKpiVehicles", Number(kpis.vehicleRecords || 0).toLocaleString("en-US"));
+        setText("sumoKpiSteps", Number(kpis.steps || 0).toLocaleString("en-US"));
+        setText("sumoKpiSpeed", `${Number(kpis.averageSpeed || 0).toFixed(2)} m/s`);
+      }
+
+      async function loadHeatmap() {
+        const zone = zones[zoneKey];
+        setText("sumoStatus", "Loading SUMO heatmap...");
+        try {
+          currentData = await loadJson(zone.heatmap);
+          if (!currentData.points) throw new Error("Invalid heatmap format");
+          setText("sumoStatus", `Loaded: ${zone.heatmap.split("/").pop()}`);
+          heatPoints = normalizeHeat(currentData.points);
+          drawHeatmap();
+          updateHeatKpis();
+        } catch {
+          setText("sumoStatus", `Unable to load heatmap: ${zone.heatmap}`);
+        }
+      }
+
+      function vehicleLocation(vehicle) {
+        const lat = Number(vehicle.lat);
+        const lng = Number(vehicle.lng);
+        return Number.isFinite(lat) && Number.isFinite(lng) ? [lat, lng] : null;
+      }
+
+      function fitSimulation() {
+        if (!currentData || !currentData.timesteps) return;
+        const points = [];
+        for (const timestep of currentData.timesteps) {
+          for (const vehicle of timestep.vehicles || []) {
+            const location = vehicleLocation(vehicle);
+            if (location) points.push(location);
+          }
+          if (points.length > 3000) break;
+        }
+        fitPoints(points);
+        drawStep();
+      }
+
+      function sampleVehicles(vehicles, max) {
+        if (vehicles.length <= max) return vehicles;
+        const interval = Math.ceil(vehicles.length / max);
+        return vehicles.filter((_, index) => index % interval === 0);
+      }
+
+      function speedColor(speed) {
+        if (speed < 3) return "#ff5d6c";
+        if (speed < 8) return "#ffd166";
+        return "#00d99b";
+      }
+
+      function roundedRect(x, y, width, height, radius) {
+        context.beginPath();
+        context.moveTo(x + radius, y);
+        context.lineTo(x + width - radius, y);
+        context.quadraticCurveTo(x + width, y, x + width, y + radius);
+        context.lineTo(x + width, y + height - radius);
+        context.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+        context.lineTo(x + radius, y + height);
+        context.quadraticCurveTo(x, y + height, x, y + height - radius);
+        context.lineTo(x, y + radius);
+        context.quadraticCurveTo(x, y, x + radius, y);
+        context.closePath();
+      }
+
+      function drawVehicle(x, y, speed, angle) {
+        const size = Number(byId("sumoVehicleSize").value) || 6;
+        const color = speedColor(speed);
+        context.save();
+        context.translate(x, y);
+        context.rotate((Number(angle || 0) - 90) * Math.PI / 180);
+        context.fillStyle = color;
+        context.strokeStyle = "rgba(255,255,255,0.95)";
+        context.lineWidth = 1.3;
+        context.shadowBlur = 9;
+        context.shadowColor = color;
+        roundedRect(-size, -size / 2, size * 2.4, size * 1.15, Math.max(2, size / 2));
+        context.fill();
+        context.stroke();
+        context.restore();
+      }
+
+      function drawStep() {
+        if (mode !== "simulation" || !currentData || !currentData.timesteps) return;
+        const timestep = currentData.timesteps[stepIndex];
+        if (!timestep) return;
+        clearCanvas();
+        const vehicles = sampleVehicles(timestep.vehicles || [], maxVehiclesPerFrame);
+        let count = 0;
+        let speedTotal = 0;
+        vehicles.forEach((vehicle) => {
+          const location = vehicleLocation(vehicle);
+          if (!location) return;
+          const point = map.latLngToContainerPoint(location);
+          const speed = Number(vehicle.speed || 0);
+          if (!Number.isFinite(point.x) || !Number.isFinite(point.y)) return;
+          drawVehicle(point.x, point.y, speed, Number(vehicle.angle || 0));
+          count += 1;
+          speedTotal += speed;
+        });
+        setText("sumoKpiMain", count.toLocaleString("en-US"));
+        setText("sumoKpiVehicles", count.toLocaleString("en-US"));
+        setText("sumoKpiSpeed", `${(count ? speedTotal / count : 0).toFixed(2)} m/s`);
+      }
+
+      function animationLoop(timestamp) {
+        if (mode !== "simulation" || !currentData || !currentData.timesteps) return;
+        const delay = Math.max(20, 280 - (Number(byId("sumoSpeed").value) || 6) * 20);
+        if (playing && timestamp - lastFrame >= delay) {
+          drawStep();
+          stepIndex = (stepIndex + 1) % currentData.timesteps.length;
+          lastFrame = timestamp;
+        }
+        animationFrame = requestAnimationFrame(animationLoop);
+      }
+
+      async function loadSimulation() {
+        const zone = zones[zoneKey];
+        setText("sumoStatus", "Loading SUMO geo simulation...");
+        try {
+          currentData = await loadJson(zone.simulation);
+          if (!currentData.timesteps) throw new Error("Invalid simulation format");
+          setText("sumoStatus", `Loaded: ${zone.simulation.split("/").pop()}`);
+          setText("sumoKpiSteps", currentData.timesteps.length.toLocaleString("en-US"));
+          setText("sumoKpiSpeed", `${Number((currentData.kpis || {}).averageSpeed || 0).toFixed(2)} m/s`);
+          window.setTimeout(() => {
+            resizeCanvas();
+            fitSimulation();
+            playing = true;
+            cancelAnimationFrame(animationFrame);
+            lastFrame = 0;
+            animationFrame = requestAnimationFrame(animationLoop);
+          }, 150);
+        } catch {
+          setText("sumoStatus", `Unable to load simulation: ${zone.simulation}`);
+        }
+      }
+
+      function bindDashboard() {
+        document.querySelectorAll(".sumo-mode").forEach((button) => button.addEventListener("click", () => { mode = button.dataset.sumoMode; loadCurrent(); }));
+        document.querySelectorAll(".sumo-zone").forEach((button) => button.addEventListener("click", () => { zoneKey = button.dataset.sumoZone; loadCurrent(); }));
+        ["sumoRadius", "sumoBlur", "sumoIntensity"].forEach((id) => byId(id).addEventListener("input", () => { if (mode === "heatmap") drawHeatmap(); }));
+        byId("sumoResetHeatmap").addEventListener("click", () => { if (mode === "heatmap") drawHeatmap(); });
+        byId("sumoPlay").addEventListener("click", () => { playing = true; });
+        byId("sumoPause").addEventListener("click", () => { playing = false; });
+        byId("sumoRestart").addEventListener("click", () => { stepIndex = 0; drawStep(); });
+        byId("sumoVehicleSize").addEventListener("input", drawStep);
+        byId("sumoResetSimulation").addEventListener("click", fitSimulation);
+        window.addEventListener("portfolio-language-change", () => {
+          updateUI();
+          if (mode === "heatmap" && currentData) updateHeatKpis();
+          if (mode === "simulation" && currentData) drawStep();
+        });
+      }
+
+      document.addEventListener("DOMContentLoaded", () => {
+        const dashboard = byId("sumo-dashboard");
+        if (!dashboard) return;
+        bindDashboard();
+        let started = false;
+        const start = () => {
+          if (started) return;
+          started = true;
+          if (initMap()) loadCurrent();
+        };
+        if (location.hash === "#simulation") start();
+        const observer = new IntersectionObserver((entries) => {
+          if (!entries[0].isIntersecting) return;
+          observer.disconnect();
+          start();
+        }, { rootMargin: "320px 0px", threshold: 0.01 });
+        observer.observe(dashboard);
+      });
+    })();
+  </script>
+  <script>
+    const menuButton = document.querySelector(".menu-toggle");
+    const navLinks = document.querySelector(".nav-links");
+    const navigationItems = [...document.querySelectorAll(".nav-links a[href^='#']")];
+    const sections = [...document.querySelectorAll("main section[id]")];
+    const cvModal = document.querySelector("#cv-preview");
+
+    function closeMenu() {
+      navLinks.classList.remove("open");
+      menuButton.setAttribute("aria-expanded", "false");
+      menuButton.setAttribute("aria-label", "Open navigation menu");
+    }
+
+    menuButton.addEventListener("click", () => {
+      const opening = !navLinks.classList.contains("open");
+      navLinks.classList.toggle("open", opening);
+      menuButton.setAttribute("aria-expanded", String(opening));
+      menuButton.setAttribute("aria-label", opening ? "Close navigation menu" : "Open navigation menu");
+    });
+
+    navigationItems.forEach((link) => link.addEventListener("click", closeMenu));
+
+    function closeCvPreview() {
+      if (location.hash === "#cv-preview") location.hash = "#top";
+    }
+
+    cvModal.addEventListener("click", (event) => { if (event.target === cvModal) closeCvPreview(); });
+    document.addEventListener("keydown", (event) => { if (event.key === "Escape" && location.hash === "#cv-preview") closeCvPreview(); });
+
+    const observer = new IntersectionObserver((entries) => {
+      const visible = entries
+        .filter((entry) => entry.isIntersecting)
+        .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+      if (!visible) return;
+      navigationItems.forEach((link) => {
+        link.classList.toggle("active", link.getAttribute("href") === `#${visible.target.id}`);
+      });
+    }, { rootMargin: "-20% 0px -62% 0px", threshold: [0.04, 0.35, 0.7] });
+
+    sections.forEach((section) => observer.observe(section));
+  </script>
+</body>
+</html>

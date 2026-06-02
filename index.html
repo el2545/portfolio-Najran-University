@@ -10,7 +10,7 @@
   <meta property="og:description" content="Evidence-first Najran University MBA admissions portfolio: managerial readiness, ROI discipline, operations, data governance, stakeholder trust, and ethical business reasoning.">
   <title>El Ghali Sany | Najran University MBA Portfolio</title>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect rx='18' width='64' height='64' fill='%23061c38'/%3E%3Crect x='8' y='8' width='48' height='48' rx='13' fill='none' stroke='%23c7a252' stroke-width='2'/%3E%3Ctext x='32' y='39' text-anchor='middle' font-family='Georgia,serif' font-size='20' font-weight='700' letter-spacing='1' fill='%23ead9ae'%3EES%3C/text%3E%3C/svg%3E">
-  <link rel="stylesheet" href="leaflet.min.css">
+  <link rel="stylesheet" href="leaflet.min.css" onerror="this.onerror=null;this.href='https://unpkg.com/leaflet@1.9.4/dist/leaflet.css';">
   <style>
     :root {
       --navy-950: #061c38;
@@ -1371,6 +1371,29 @@
   <script src="leaflet.min.js"></script>
   <script src="leaflet-heat.js"></script>
   <script>
+    function loadScriptOnce(src) {
+      return new Promise((resolve) => {
+        const existing = document.querySelector(`script[src="${src}"]`);
+        if (existing) { existing.addEventListener("load", () => resolve(true), { once: true }); existing.addEventListener("error", () => resolve(false), { once: true }); return; }
+        const script = document.createElement("script");
+        script.src = src;
+        script.onload = () => resolve(true);
+        script.onerror = () => resolve(false);
+        document.head.appendChild(script);
+      });
+    }
+
+    async function ensureSumoMapLibraries() {
+      if (!window.L) {
+        await loadScriptOnce("https://unpkg.com/leaflet@1.9.4/dist/leaflet.js");
+      }
+      if (window.L && !window.L.heatLayer) {
+        await loadScriptOnce("https://unpkg.com/leaflet.heat@0.2.0/dist/leaflet-heat.js");
+      }
+      return Boolean(window.L);
+    }
+  </script>
+  <script>
     (() => {
       const zones = {
         maarif: {
@@ -1417,8 +1440,11 @@
       let lastFrame = 0;
 
       async function loadJson(path) {
+        if (location.protocol === "file:") {
+          throw new Error("Local file mode blocks JSON loading. Use GitHub Pages or a local server.");
+        }
         const response = await fetch(path);
-        if (!response.ok) throw new Error(path);
+        if (!response.ok) throw new Error(`${path} returned HTTP ${response.status}`);
         return response.json();
       }
 
@@ -1513,7 +1539,11 @@
 
       function drawHeatmap() {
         removeHeat();
-        if (!map || !heatPoints.length || !L.heatLayer) return;
+        if (!map || !heatPoints.length) return;
+        if (!L.heatLayer) {
+          setText("sumoStatus", "Leaflet heatmap plugin unavailable. Upload leaflet-heat.js to the root folder or allow the CDN fallback.");
+          return;
+        }
         const radius = Number(byId("sumoRadius").value);
         const blur = Number(byId("sumoBlur").value);
         const multiplier = Number(byId("sumoIntensity").value) / 12;
@@ -1543,8 +1573,8 @@
           heatPoints = normalizeHeat(currentData.points);
           drawHeatmap();
           updateHeatKpis();
-        } catch {
-          setText("sumoStatus", `Unable to load heatmap: ${zone.heatmap}`);
+        } catch (error) {
+          setText("sumoStatus", `${error.message || "Unable to load heatmap"}: ${zone.heatmap}`);
         }
       }
 
@@ -1662,8 +1692,8 @@
             lastFrame = 0;
             animationFrame = requestAnimationFrame(animationLoop);
           }, 150);
-        } catch {
-          setText("sumoStatus", `Unable to load simulation: ${zone.simulation}`);
+        } catch (error) {
+          setText("sumoStatus", `${error.message || "Unable to load simulation"}: ${zone.simulation}`);
         }
       }
 
@@ -1689,10 +1719,12 @@
         if (!dashboard) return;
         bindDashboard();
         let started = false;
-        const start = () => {
+        const start = async () => {
           if (started) return;
           started = true;
-          if (initMap()) loadCurrent();
+          const librariesAvailable = await ensureSumoMapLibraries();
+          if (librariesAvailable && initMap()) loadCurrent();
+          else setText("sumoStatus", "Leaflet unavailable. Upload leaflet.min.js to the root folder or allow internet/CDN access.");
         };
         const startSoon = () => window.setTimeout(start, 80);
         dashboard.addEventListener("click", startSoon, { capture: true });
